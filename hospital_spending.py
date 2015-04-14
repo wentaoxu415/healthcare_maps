@@ -16,7 +16,6 @@ with open(spending_file, 'rU') as spending_fh:
 	spending_csv = csv.reader(spending_fh, delimiter=',', quotechar='"')
 	next(spending_csv, None)
 
-	counter = 0
 	for row in spending_csv:
 		if row[3] == "Complete Episode":
 			hospital = dict()
