@@ -39,8 +39,14 @@ var projection = d3.geo.albersUsa()
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
-    .pointRadius([2])
+    .pointRadius([1])
     .projection(projection);
+
+var zoom = d3.behavior.zoom()
+    .translate(projection.translate())
+    .scale(projection.scale())
+    .scaleExtent([height, 8 * height])
+    .on("zoom", zoomed);
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -61,6 +67,13 @@ queue()
 
 function makeMap(error, us, hospital){
 
+  // var counties = topojson.feature(us, us.objects.counties).features
+  // svg.selectAll("path")
+  //   .data(counties)
+  //   .enter().append("path")
+  //   .attr("d", path);
+  // console.log(counties);
+
   g.append("g")
         .attr("id", "states")
       .selectAll("path")
@@ -69,16 +82,16 @@ function makeMap(error, us, hospital){
         .attr("d", path)
         .on("click", clicked);
 
-  // g.append("path")
-  //   .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-  //   .attr("id", "state-borders")
-  //   .attr("d", path);
+  g.append("path")
+    .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+    .attr("id", "state-borders")
+    .attr("d", path);
 
   var points = hospital;
   g.append("path")
     .datum(points)
     .attr("d", path);
-  console.log(points);
+  //console.log(points);
 }
 
 function clicked(d) {
@@ -104,5 +117,10 @@ function clicked(d) {
       .duration(750)
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
       .style("stroke-width", 1.5 / k + "px");
+}
+
+function zoomed() {
+  projection.translate(d3.event.translate).scale(d3.event.scale);
+  g.selectAll("path").attr("d", path);
 }
 </script>
