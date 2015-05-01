@@ -63,6 +63,7 @@ var allData;
 
 queue()
     .defer(d3.json, "map/us.json")
+    .defer(d3.json, "hospital.json")
     .defer(d3.csv, "data/population.csv")//, function(d) {  rateById.set(d["GEO.id2"], +d["HD01_VD01"]); })
     .defer(d3.csv, "data/allData.csv")
     .await(ready);

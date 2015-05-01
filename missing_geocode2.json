@@ -1,0 +1,262 @@
+{
+    "SOUTHERN TENNESSEE REGIONAL HEALTH SYSTEM LAWRENCE": [
+        "HWY 43 S BOX 847", 
+        "LAWRENCEBURG", 
+        "TN"
+    ], 
+    "NOVANT HEALTH FRANKLIN MEDICAL CENTER": [
+        "100 HOSPITAL DR BOX 609", 
+        "LOUISBURG", 
+        "NC"
+    ], 
+    "BROOKDALE HOSPITAL MEDICAL CENTER": [
+        "LINDEN BOULEVARD AT BROOKDALE PLAZA", 
+        "BROOKLYN", 
+        "NY"
+    ], 
+    "NIX HEALTH CARE SYSTEM": [
+        "414 NAVARRO, SUITE 600", 
+        "SAN ANTONIO", 
+        "TX"
+    ], 
+    "INTEGRIS BAPTIST REG HEALTH CENTER": [
+        "200 SECOND AVENUE SOUTHWEST, BOX 1207", 
+        "MIAMI", 
+        "OK"
+    ], 
+    "DHHS USPHS INDIAN HEALTH SERVICES": [
+        "EXIT #102 OFF I-40 1/2 MILE SOUTH", 
+        "SAN FIDEL", 
+        "NM"
+    ], 
+    "BLACK RIVER COMMUNITY MEDICAL CENTER": [
+        "217 PHYSICIANS PARK DRIVE", 
+        "POPLAR BLUFF", 
+        "MO"
+    ], 
+    "AVERA ST LUKES": [
+        "305 S STATE ST  POST OFFICE BOX 4450", 
+        "ABERDEEN", 
+        "SD"
+    ], 
+    "ST MARY'S HEALTH CENTER": [
+        "100 ST MARY'S MEDICAL PLAZA", 
+        "JEFFERSON CITY", 
+        "MO"
+    ], 
+    "DUKE UNIVERSITY HOSPITAL": [
+        "PO BOX 3708 DUMC  ERWIN RD", 
+        "DURHAM", 
+        "NC"
+    ], 
+    "AVERA MCKENNAN HOSPITAL & UNIVERSITY HEALTH CENTER": [
+        "1325 S CLIFF AVE  POST OFFICE BOX 5045", 
+        "SIOUX FALLS", 
+        "SD"
+    ], 
+    "ZUNI COMPREHENSIVE COMMUNITY HEALTH CENTER": [
+        "ROUTE 301 NORTH B STREET", 
+        "ZUNI", 
+        "NM"
+    ], 
+    "NEW HANOVER REGIONAL MEDICAL CENTER": [
+        "2131 S 17TH ST BOX 9000", 
+        "WILMINGTON", 
+        "NC"
+    ], 
+    "ROOSEVELT GENERAL HOSPITAL": [
+        "42121 US HIGHWAY 70", 
+        "PORTALES", 
+        "NM"
+    ], 
+    "MEDICAL COLLEGE OF VIRGINIA HOSPITALS": [
+        "1250 EAST MARSHALL STREET - BOX 980510", 
+        "RICHMOND", 
+        "VA"
+    ], 
+    "METHODIST MEDICAL CENTER OF OAK RIDGE": [
+        "990 OAK RIDGE TURNPIKE BOX 529", 
+        "OAK RIDGE", 
+        "TN"
+    ], 
+    "NOVANT HEALTH PRESBYTERIAN MEDICAL CENTER": [
+        "200 HAWTHORNE LANE BOX 33549", 
+        "CHARLOTTE", 
+        "NC"
+    ], 
+    "CANNON MEMORIAL HOSPITAL": [
+        "123 MEDICAL PARK DRIVE PO BOX 188", 
+        "PICKENS", 
+        "SC"
+    ], 
+    "SOUTHWEST MS REGIONAL MEDICAL CENTER": [
+        "215 MARION AV BOX 1307", 
+        "MCCOMB", 
+        "MS"
+    ], 
+    "TENNOVA HEALTHCARE-LAFOLLETT MEDICAL CENTER": [
+        "923 EAST CENTRAL AVENUE", 
+        "LA FOLLETTE", 
+        "TN"
+    ], 
+    "SUMMIT MEDICAL CENTER": [
+        "1800 SOUTH RENAISSANCE BOULEVARD", 
+        "EDMOND", 
+        "OK"
+    ], 
+    "RAPID CITY REGIONAL HOSPITAL": [
+        "353 FAIRMONT BLVD  POST OFFICE BOX 6000", 
+        "RAPID CITY", 
+        "SD"
+    ], 
+    "UNIVERSITY HOSPITAL ( STONY BROOK )": [
+        "HEALTH SCIENCES CENTER SUNY", 
+        "STONY BROOK", 
+        "NY"
+    ], 
+    "PRESBYTERIAN HOSPITAL MATTHEWS": [
+        "1500 MATTHEWS TWNSHP PRKWY BOX 3310", 
+        "MATTHEWS", 
+        "NC"
+    ], 
+    "MCLEOD REGIONAL MEDICAL CENTER-PEE DEE": [
+        "555 E CHEVES ST BOX 8700", 
+        "FLORENCE", 
+        "SC"
+    ], 
+    "MULTICARE AUBURN MEDICAL CENTER": [
+        "202 NORTH DIVISION STREET PLAZA ONE", 
+        "AUBURN", 
+        "WA"
+    ], 
+    "NORMAN REGIONAL HEALTH SYSTEM": [
+        "901 NORTH PORTER", 
+        "NORMAN", 
+        "OK"
+    ], 
+    "SHARE MEDICAL CENTER": [
+        "800 SHARE DRIVE", 
+        "ALVA", 
+        "OK"
+    ], 
+    "MARY BLACK MEMORIAL HOSPITAL": [
+        "1700 SKYLYN DR BOX 3217", 
+        "SPARTANBURG", 
+        "SC"
+    ], 
+    "HARTON REGIONAL MEDICAL CENTER": [
+        "1801 N JACKSON ST BOX 460", 
+        "TULLAHOMA", 
+        "TN"
+    ], 
+    "ST JOSEPH HEALTH CENTER": [
+        "667 EASTLAND AVE SE", 
+        "WARREN", 
+        "OH"
+    ], 
+    "EDGEWOOD SURGICAL HOSPITAL": [
+        "239 EDGEWOOD DRIVE EXTENSION", 
+        "TRANSFER", 
+        "PA"
+    ], 
+    "NOVANT HEALTH THOMASVILLE MEDICAL CENTER": [
+        "207 OLD LEXINGTON RD BOX 789", 
+        "THOMASVILLE", 
+        "NC"
+    ], 
+    "BELLVILLE GENERAL HOSPITAL": [
+        "44 N CUMMINGS", 
+        "BELLVILLE", 
+        "TX"
+    ], 
+    "INSTITUTE FOR ORTHOPAEDIC SURGERY": [
+        "801 MEDICAL DRIVE, SUITE B", 
+        "LIMA", 
+        "OH"
+    ], 
+    "KERSHAW HEALTH": [
+        "HAILE AND ROBERTS STREETS, BOX 7003", 
+        "CAMDEN", 
+        "SC"
+    ], 
+    "UNIVERSITY OF WASHINGTON MEDICAL CTR": [
+        "1959 NE PACIFIC ST  BOX 356151", 
+        "SEATTLE", 
+        "WA"
+    ], 
+    "TOPPENISH COMMUNITY HOSPITAL": [
+        "502 W FOURTH AVE", 
+        "TOPPENISH", 
+        "WA"
+    ], 
+    "CAROLINAS HOSPITAL SYSTEM": [
+        "805 PAMPLICO HWY BOX 100550", 
+        "FLORENCE", 
+        "SC"
+    ], 
+    "GEORGETOWN MEMORIAL HOSPITAL": [
+        "606 BLACK RIVER RD DRAWER 1718", 
+        "GEORGETOWN", 
+        "SC"
+    ], 
+    "CENTRAL VERMONT MEDICAL CENTER": [
+        "BOX 547", 
+        "BARRE", 
+        "VT"
+    ], 
+    "P H S INDIAN HOSPITAL AT BROWNING - BLACKFEET": [
+        "760 HOSPITAL CIRCLE, POST OFFICE BOX 760", 
+        "BROWNING", 
+        "MT"
+    ], 
+    "GRANVILLE HEALTH SYSTEMS": [
+        "COLLEGE ST BOX 947", 
+        "OXFORD", 
+        "NC"
+    ], 
+    "PRAIRIE LAKES HOSPITAL": [
+        "401 9TH AVENUE NW  POST OFFICE BOX 1210", 
+        "WATERTOWN", 
+        "SD"
+    ], 
+    "SOUTH CENTRAL REG MED CTR": [
+        "1220 JEFFERSON ST BOX 607", 
+        "LAUREL", 
+        "MS"
+    ], 
+    "CHOCTAW MEMORIAL HOSPITAL": [
+        "1405 EAST KIRK ROAD", 
+        "HUGO", 
+        "OK"
+    ], 
+    "CLARENDON MEMORIAL HOSPITAL": [
+        "10 HOSPITAL ST BOX 550", 
+        "MANNING", 
+        "SC"
+    ], 
+    "UNIVERSITY OF MISSOURI HEALTH CARE": [
+        "ONE HOSPITAL DRIVE, ROOM CE121, DC031,00", 
+        "COLUMBIA", 
+        "MO"
+    ], 
+    "NATCHEZ COMMUNITY HOSPITAL": [
+        "129 JEFFERSON DAVIS BLVD BOX 1203", 
+        "NATCHEZ", 
+        "MS"
+    ], 
+    "SANFORD USD MEDICAL CENTER": [
+        "1305 W 18TH ST  POST OFFICE BOX 5039", 
+        "SIOUX FALLS", 
+        "SD"
+    ], 
+    "EL CAMPO MEMORIAL HOSPITAL": [
+        "303 SANDY CORNER RD", 
+        "EL CAMPO", 
+        "TX"
+    ], 
+    "CHEROKEE INDIAN HOSPITAL AUTHORITY": [
+        "CALLER BOX C268", 
+        "CHEROKEE", 
+        "NC"
+    ]
+}

@@ -13,9 +13,9 @@ missing_array = dict()
 
 info_file = "data/hospital_general_information.csv"
 spending_file = "data/medicare_hospital_spending.csv"
-out_file = open("hospital_spending.json", "w")
-miss_file = open("missing_geocode.json", "w")
-temp_file = open("temp_hospital_spending.json", "w")
+out_file = open("hospital_spending2.json", "w")
+miss_file = open("missing_geocode2.json", "w")
+temp_file = open("temp_hospital_spending2.json", "w")
 
 def format_spending(amount):
 	temp = amount.strip('$')
@@ -34,7 +34,12 @@ with open(spending_file, 'rU') as spending_fh:
 
 with open(info_file, 'rU') as info_fh:
 	info_csv = csv.reader(info_fh, delimiter=',', quotechar='"')
-	next(info_csv, None)
+
+	ctr = 0
+	while ctr < 2000:
+		next(info_csv, None)
+		ctr += 1
+
 	ctr = 0
 	for row in info_csv:
 		if row[0] in hospital_array:	
