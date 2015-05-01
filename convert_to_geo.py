@@ -9,24 +9,20 @@ with open("hospital_spending_final.json") as data_file:
 	data = json.load(data_file)
 	counter = 1
 	for key, value in data.iteritems():
-		if counter <= 2000:
-			counter+=1
-			continue 
-		else:
-			if len(value) > 1: #Make sure we have more than spending data
-				if (value["longitude"] and value["longitude"]) != None:
-					#print value["longitude"], value["latitude"]
-					feat = Feature(geometry=Point((value["longitude"], value["latitude"])), 
-						properties={
-						"name":value["name"], 
-						"address":value["address"], 
-						"city":value["city"], 
-						"state": value["state"], 
-						"zip": value["zip"], 
-						"county": value["county"], 
-						"owner": value["owner"]
-						})
-					feat_collect.append(feat)
+		if len(value) > 1: #Make sure we have more than spending data
+			if (value["longitude"] and value["longitude"]) != None:
+				#print value["longitude"], value["latitude"]
+				feat = Feature(geometry=Point((value["longitude"], value["latitude"])), 
+					properties={
+					"name":value["name"], 
+					"address":value["address"], 
+					"city":value["city"], 
+					"state": value["state"], 
+					"zip": value["zip"], 
+					"county": value["county"], 
+					"owner": value["owner"]
+					})
+				feat_collect.append(feat)
 
 	results = FeatureCollection(feat_collect)
 	#rint type(results)

@@ -14,12 +14,13 @@ import json
 
 # json.dump(hospital, out_file, indent=4)
 
-with open("hospital_final.json") as hospital:
+with open("hospital_spending_final.json") as hospital:
 	data = json.load(hospital)
 	counter = 0
 	for key, value in data.iteritems():
-		if len(value) <= 5:
-			print key
+		if len(value) > 1:
 			counter+=1
 
 	print counter
+
+	
