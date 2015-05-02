@@ -42,7 +42,7 @@
 /*
 INITIALIZATIONS
 */
-var width = 960,
+var width = 800,
     height = 500,
     centered;
 
@@ -62,13 +62,16 @@ svg.append("rect")
     .attr("width", width)
     .attr("height", height)
   
-var g = svg.append("g");
 
 var zoom = d3.behavior.zoom()
     .translate(projection.translate())
     .scale(projection.scale())
     .scaleExtent([height, 8 * height])
     .on("zoom", zoomed);
+     
+var g = svg.append("g")
+  .call(zoom);
+
 //////////////////////////////////////////
 /*LOAD DATA*/
 queue()
