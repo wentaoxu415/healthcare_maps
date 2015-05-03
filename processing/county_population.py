@@ -3,9 +3,9 @@ import csv
 
 demographics_array = dict()
 
-info_file = "data/hospital_general_information.csv"
-demo_file = "data/demographics.csv"
-out_file = open("demographics.json", "w")
+info_file = "../data/hospital_general_information.csv"
+demo_file = "../data/demographics.csv"
+out_file = open("../data/demographics.json", "w")
 demo_array = dict()
 
 with open(demo_file, "rU") as demo_fh:

@@ -3,9 +3,9 @@ import csv
 
 demographics_array = dict()
 
-age_file = "data/age.csv"
-race_file = "data/race.csv"
-out_file = open("age_race.json", "w")
+age_file = "../data/age.csv"
+race_file = "../data/race.csv"
+out_file = open("../data/age_race.json", "w")
 demo_array = dict()
 
 with open(age_file, "rU") as age_fh:

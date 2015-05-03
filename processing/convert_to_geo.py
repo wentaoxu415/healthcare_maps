@@ -3,9 +3,9 @@ from pprint import pprint
 import geojson
 from geojson import FeatureCollection, Feature, Point
 
-out_file = open("hospital_final.json", "w")
+out_file = open("../data/hospital_final.json", "w")
 feat_collect = []
-with open("hospital_spending_final.json") as data_file:
+with open("../data/hospital_spending_final.json") as data_file:
 	data = json.load(data_file)
 	counter = 1
 	for key, value in data.iteritems():
