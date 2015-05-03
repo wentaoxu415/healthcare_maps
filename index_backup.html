@@ -76,8 +76,8 @@ var g = svg.append("g")
 //////////////////////////////////////////
 /*LOAD DATA*/
 queue()
-  .defer(d3.json, 'us.json')
-  .defer(d3.json, 'hospital_final.json')
+  .defer(d3.json, 'data/us.json')
+  .defer(d3.json, 'data/hospital_final.json')
   .await(makeMap);
 //////////////////////////////////////////
 /*MAIN FUNCTIONS*/
@@ -125,7 +125,7 @@ function display(d){
 
 function clicked(d) {
   var x, y, k;
-  console.log(d);
+
   if (d && centered !== d) {
     var centroid = path.centroid(d);
     x = centroid[0];
