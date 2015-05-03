@@ -11,11 +11,11 @@ geolocator1 = GoogleV3('AIzaSyAuX711XQT5Vd6qVQVVc-qf6sxKZGEWXhw', timeout=5)
 hospital_array = dict()
 missing_array = dict()
 
-info_file = "data/hospital_general_information.csv"
-spending_file = "data/medicare_hospital_spending.csv"
-out_file = open("hospital_spending2.json", "w")
-miss_file = open("missing_geocode2.json", "w")
-temp_file = open("temp_hospital_spending2.json", "w")
+info_file = "../data/hospital_general_information.csv"
+spending_file = "../data/medicare_hospital_spending.csv"
+out_file = open("../data/hospital_spending2.json", "w")
+miss_file = open("../data/missing_geocode2.json", "w")
+temp_file = open("../data/temp_hospital_spending2.json", "w")
 
 def format_spending(amount):
 	temp = amount.strip('$')
