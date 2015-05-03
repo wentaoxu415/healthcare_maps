@@ -16,10 +16,10 @@
   <link rel="stylesheet" type="text/css" href="css/myStyle.css">
   
   <!-- Add vis classes--> 
-  <script src = "js/mapvis.js"></script>
-  <script src= "js/infovis.js"></script>
-  <script src= "js/agevis.js"></script>
-  <script src= "js/racevis.js"></script>
+  <script src="js/mapvis.js"></script>
+  <script src="js/infovis.js"></script>
+  <script src="js/agevis.js"></script>
+  <script src="js/racevis.js"></script>
   
 </head>
 <body>
@@ -30,9 +30,13 @@
         <svg width = "800" height="500">
         <p>This space is for the Visualization Map</p>
       </div>
-      <div class="col-md-4">
-        <svg width = "400" height="500" id="hospital_info">
-        <p>This space is for the Hospital Info</p>
+      <div class="col-md-4 right" id="info_vis">
+          <span id="hospital_name">Name: </span>
+          <span id="hospital_address">Address: </span>
+          <span id="hospital_city">City: </span>
+          <span id="hospital_county">County: </span>
+          <span id="hospital_state">State: </span>
+          <span id="hospital_type">Hospital Type: </span>
       </div> 
     </div>
     <div class="row">
@@ -75,10 +79,11 @@
     var initVis = function(){
       var MyEventHandler = new Object();
       var map_vis = new MapVis(d3.select("#map_vis"), mapData, hosData, MyEventHandler);
+      var info_vis = new InfoVis(d3.select("#info_vis"), mapData, hosData, MyEventHandler);
       //var age_vis = new AgeVis(d3.select("#ageVis"), allData)
-      // $(MyEventHandler).bind("selectionChanged", function(event, object){
-      //   map_vis.onSelectionChange(object);
-      // })
+      $(MyEventHandler).bind("selectionChanged", function(event, object){
+        info_vis.onSelectionChange(object);
+      })
     }
 
     var dataLoaded = function(error, _mapData, _hosData){

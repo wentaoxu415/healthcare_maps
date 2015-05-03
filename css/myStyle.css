@@ -2,6 +2,21 @@ h1{
    text-align: center;
 }
 
+span{
+  display: block;
+}
+
+.right{
+  float: right;
+  padding-left: 50px;
+  padding-top: 20px;
+}
+
+#infovis{
+  height: 500px;
+  width: 400px;
+}
+
 .background {
   fill: none;
   pointer-events: all;

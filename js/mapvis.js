@@ -29,9 +29,10 @@ MapVis.prototype.initVis = function(){
     	.translate([this.width / 2, this.height / 2]);
 
     this.path = d3.geo.path()
-    	.pointRadius([0.5])
+    	.pointRadius([2])
     	.projection(this.projection)
    	
+
    	var that = this;
     var zoom = d3.behavior.zoom()
     	.translate(this.projection.translate())
@@ -65,7 +66,9 @@ MapVis.prototype.updateVis = function(){
 		.data(this.hosData.features)
 		.enter().append("path")
 		.attr("d", this.path)
-		.on("click", this.display);  
+		.on("click", function(d){
+			$(that.eventHandler).trigger("selectionChanged", d);
+		});  
 	
 }
 
@@ -96,13 +99,14 @@ MapVis.prototype.clicked = function(d, that){
 
 }
 
-MapVis.prototype.display = function(d){
-	console.log(d);
-}
-
 MapVis.prototype.zoomed = function(that){
 	that.projection.translate(d3.event.translate).scale(d3.event.scale);
 	that.g.selectAll("path").attr("d", that.path);
 }
+
+// MapVis.prototype.display = function(d, that){
+// 	console.log("data", d);
+// 	$(that.eventHandler).trigger("selectionChanged", d);
+// }
 
 
