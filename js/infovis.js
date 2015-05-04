@@ -7,7 +7,6 @@ InfoVis = function(_parentElement, _mapData, _hosData, _eventHandler){
 }
 
 InfoVis.prototype.onSelectionChange = function(d){
-	console.log(d.properties);
 	d3.select("#hospital_name").text("Name: "+d.properties.name);
 	d3.select("#hospital_address").text("Address : "+d.properties.address);
 	d3.select("#hospital_city").text("City: "+d.properties.city);
