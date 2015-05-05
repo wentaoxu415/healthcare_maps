@@ -476,9 +476,12 @@ body {
 }
 
 #intro_team{
+    position: absolute;
     width: 400px;
     height: 200px;
     left: 50%;
-    opacity: 0.4;
+    opacity: 0.6;
+    font-size: 18px;
+    color: #FF6600;
     background-color: #DBDBDE;
 }
