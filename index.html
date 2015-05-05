@@ -22,7 +22,6 @@
   <script src="js/racevis.js"></script>
   <script src="js/spendingvis.js"></script>
   <script src="js/qualityvis.js"></script>
-  <script src="js/scattervis.js"></script>
   
 </head>
 <body>
@@ -52,7 +51,7 @@
       </div>
     </div> 
     <div class="row">
-      <div class="col-md-8" id="quality_hist">
+      <div class="col-md-8" id="test_vis">
         <svg width = "800" height="500">
         <p>This space is for the Quality Histogram</p>
       </div>
@@ -82,6 +81,7 @@
     var county_race = [];
     var spendingData = [];
     var county_income = [];
+    var qualityData = [];
     var initVis = function(){
       var MyEventHandler = new Object();
       var map_vis = new MapVis(d3.select("#map_vis"), mapData, hosData, MyEventHandler);
@@ -89,14 +89,18 @@
       var age_vis = new AgeVis(d3.select("#age_vis"), county_age, state_demo, MyEventHandler);
       var race_vis = new RaceVis(d3.select("#race_vis"), county_race, state_demo, MyEventHandler);
       var spending_vis = new SpendingVis(d3.select("#spending_vis"), spendingData, MyEventHandler);
+      var quality_vis = new QualityVis(d3.select("#test_vis"), qualityData, MyEventHandler);
+      //var quality_vis = new QualityVis(d3.select("#quality_vis"), spendingData, MyEventHandler);
+    
       $(MyEventHandler).bind("selectionChanged", function(event, object){
         info_vis.onSelectionChange(object);
         age_vis.onSelectionChange(object);
         race_vis.onSelectionChange(object);
         spending_vis.onSelectionChange(object);
+        quality_vis.onSelectionChange(object);
       })
     }
-    var dataLoaded = function(error, _mapData, _hosData, _county_demo, _state_demo, _county_race, _spendingData, _county_income){
+    var dataLoaded = function(error, _mapData, _hosData, _county_demo, _state_demo, _county_race, _spendingData, _qualityData){
       if (!error){
         mapData = _mapData;
         hosData = _hosData;
@@ -104,7 +108,7 @@
         state_demo = _state_demo;
         county_race = _county_race;
         spendingData = _spendingData;
-        //county_income = _county_income;
+        qualityData = _qualityData;
         initVis();
       }
     }
@@ -116,7 +120,7 @@
         .defer(d3.json, 'data/state_demographics.json')
         .defer(d3.json, 'data/county_race.json')
         .defer(d3.json, 'data/hospital_spendingData.json')
-        //.defer(d3.json, 'data/county_income.json')
+        .defer(d3.json, 'data/quality_score.json')
         .await(dataLoaded);
     }
     //Call startHere() function
