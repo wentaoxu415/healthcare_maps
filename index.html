@@ -20,6 +20,9 @@
   <script src="js/infovis.js"></script>
   <script src="js/agevis.js"></script>
   <script src="js/racevis.js"></script>
+  <script src="js/spendingvis.js"></script>
+  <script src="js/qualityvis.js"></script>
+  <script src="js/scattervis.js"></script>
   
 </head>
 <body>
@@ -39,7 +42,7 @@
       </div> 
     </div>
     <div class="row">
-      <div class="col-md-8" id="spending_hist">
+      <div class="col-md-8" id="spending_vis">
         <svg width = "800" height="500">
         <p>This space is for the Spending Histogram</p>
       </div>
@@ -76,25 +79,34 @@
     var hosData = [];
     var county_age = [];
     var state_demo = [];
+    var county_race = [];
+    var spendingData = [];
+    var county_income = [];
 
     var initVis = function(){
       var MyEventHandler = new Object();
       var map_vis = new MapVis(d3.select("#map_vis"), mapData, hosData, MyEventHandler);
       var info_vis = new InfoVis(d3.select("#info_vis"), mapData, hosData, MyEventHandler);
       var age_vis = new AgeVis(d3.select("#age_vis"), county_age, state_demo, MyEventHandler);
-      
+      var race_vis = new RaceVis(d3.select("#race_vis"), county_race, state_demo, MyEventHandler);
+      var spending_vis = new SpendingVis(d3.select("#spending_vis"), spendingData, MyEventHandler);
       $(MyEventHandler).bind("selectionChanged", function(event, object){
         info_vis.onSelectionChange(object);
         age_vis.onSelectionChange(object);
+        race_vis.onSelectionChange(object);
+        spending_vis.onSelectionChange(object);
       })
     }
 
-    var dataLoaded = function(error, _mapData, _hosData, _county_demo, _state_demo){
+    var dataLoaded = function(error, _mapData, _hosData, _county_demo, _state_demo, _county_race, _spendingData, _county_income){
       if (!error){
         mapData = _mapData;
         hosData = _hosData;
         county_age = _county_demo;
         state_demo = _state_demo;
+        county_race = _county_race;
+        spendingData = _spendingData;
+        //county_income = _county_income;
         initVis();
       }
     }
@@ -105,6 +117,9 @@
         .defer(d3.json, 'data/hospital_final.json')
         .defer(d3.json, 'data/county_age.json')
         .defer(d3.json, 'data/state_demographics.json')
+        .defer(d3.json, 'data/county_race.json')
+        .defer(d3.json, 'data/hospital_spendingData.json')
+        //.defer(d3.json, 'data/county_income.json')
         .await(dataLoaded);
     }
 

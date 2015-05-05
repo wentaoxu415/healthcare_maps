@@ -47,3 +47,12 @@ span{
 .counties:hover {
   fill: red;
 }
+
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #aaa;
+}
