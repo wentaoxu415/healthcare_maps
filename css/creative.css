@@ -474,3 +474,10 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: #222;
 }
+
+#intro_team{
+    width: 500px;
+    height: 200px;
+    opacity: 0.4;
+    background-color: #DBDBDE;
+}
