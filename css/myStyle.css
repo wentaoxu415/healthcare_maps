@@ -20,8 +20,9 @@ body{
 
 hr{
     height: 5px;
-    color: #FF6600
+    color: #FF6600;
     background-color: #FF6600;
+    width: 80%;
 }
 .row {
     margin: 40px 0;
