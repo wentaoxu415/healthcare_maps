@@ -6,6 +6,10 @@ span{
   display: block;
 }
 
+.row {
+    margin: 40px 0;
+}
+
 .right{
   float: right;
   padding-left: 50px;
@@ -62,6 +66,7 @@ span{
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
   border-radius: 2px;
+   text-align: center;
 }
 
 /* Creates a small triangle extender for the tooltip */
@@ -86,4 +91,68 @@ span{
 
 .bar:hover {
     fill: orange;
+}
+
+.land-glow {
+    fill-opacity: .2;
+    filter: url(#blur);
+}
+
+#main {
+    text-align: center;
+    width: 960px;
+    margin: 0 auto;
+}
+
+#map {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.background {
+    fill: none;
+    pointer-events: all;
+}
+
+.feature {
+    fill: #ccc;
+    cursor: pointer;
+}
+
+.state_num_hospitals, .county_num_hospitals {
+    cursor: pointer;
+}
+
+.feature.active {
+    fill: orange;
+}
+
+.mesh {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.counties {
+    fill: rgb(248, 253, 174);
+    stroke: #fff;
+    cursor: pointer;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: left;
+    display: inline;
+    padding: 6px;
+    font-size: 13px;
+    background-color: #ccc;
+    border: 0px;
+    border-radius: 2px;
+    pointer-events: none;
+    color: #000;
+}
+
+#map_vis > form {
+    text-align: center;
 }
