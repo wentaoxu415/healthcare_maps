@@ -33,15 +33,15 @@ ScatterVis.prototype.initVis = function () {
         // .domain(d3.extent(this.displayData, function (d) {
         //     return d["quality"];
         // })).nice()
-        .domain([-30, 35])
-        .range([0, this.height]);
+        .domain([35, -30])
+        .range([this.height, 0]);
 
     this.xAxis = d3.svg.axis()
         .scale(this.x)
         .orient("bottom");
 
     this.yAxis = d3.svg.axis()
-        // .scale(this.y)
+        .scale(this.y)
         .orient("left");
 
     this.svg = this.svg.append("g")
