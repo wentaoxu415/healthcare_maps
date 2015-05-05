@@ -122,14 +122,12 @@ MapVis.prototype.initVis = function () {
             changeMap(selected);
             changeCounties(selected);
         });
-
+        console.log(us_states_names);
         usStates = us_states_names;
 
         var incomePpl = [1, 5000, 17500, 37500, 62500, 150000, 300000];
 
         allData = allPop;
-        console.log(allPop);
-        console.log(allData);
 
         allData.forEach(function (item) {
 
