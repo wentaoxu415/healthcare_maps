@@ -1,145 +1,167 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-  <meta charset="UTF-8">
-  <title>American Hospital Visualization</title>
-  
-  <!-- Add Libraries-->
-  <script src="libs/d3/d3.v3.min.js"></script>
-  <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
-  <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
-  <script src="libs/topojson/topojson.v1.min.js"></script>
-  <script src="libs/queue/queue.v1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>American Hospital Visualization</title>
 
-  <!-- Add stylesheets -->
-  <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/myStyle.css">
-  
-  <!-- Add vis classes--> 
-  <script src="js/mapvis.js"></script>
-  <script src="js/infovis.js"></script>
-  <script src="js/agevis.js"></script>
-  <script src="js/racevis.js"></script>
-  <script src="js/incomevis.js"></script>
-  <script src="js/spendingvis.js"></script>
-  <script src="js/qualityvis.js"></script>
-  <script src="js/scattervis.js"></script>
+    <!-- Add Libraries-->
+    <script src="libs/d3/d3.v3.min.js"></script>
+    <script src="libs/d3/d3-tip.js"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="libs/topojson/topojson.v1.min.js"></script>
+    <script src="libs/queue/queue.v1.min.js"></script>
 
-  
+    <!-- Add stylesheets -->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <h1>American Hospital Visualization</h1>
+
     <div class="row">
-      <div class="col-md-8" id="map_vis">
-        <svg width = "800" height="500">
-      </div>
-      <div class="col-md-4 right" id="info_vis">
-          <span id="hospital_name">Name: </span>
-          <span id="hospital_address">Address: </span>
-          <span id="hospital_city">City: </span>
-          <span id="hospital_county">County: </span>
-          <span id="hospital_state">State: </span>
-          <span id="hospital_type">Hospital Type: </span>
-      </div> 
+        <div class="col-md-8" id="map_vis">
+            <form>
+                <select>
+                    <option value="NonWhite">Non-white</option>
+                    <option value="Elder">Elder than 65</option>
+                    <option value="Income">Income</option>
+                </select>
+            </form>
+            <svg width="800" height="500">
+        </div>
+        <div class="col-md-4 right" id="info_vis">
+            <span id="hospital_name">Name: </span>
+            <span id="hospital_address">Address: </span>
+            <span id="hospital_city">City: </span>
+            <span id="hospital_county">County: </span>
+            <span id="hospital_state">State: </span>
+            <span id="hospital_type">Hospital Type: </span>
+        </div>
     </div>
     <div class="row">
-      <div class="col-md-8" id="spending_vis">
-        <svg width = "800" height="500">
-        <p>This space is for the Spending Histogram</p>
-      </div>
-      <div class="col-md-4" id="age_vis">
-        <svg width = "400" height="500">
-        <p>This space is for the Age Vis</p>
-      </div>
-    </div> 
+        <div class="col-md-8" id="spending_vis">
+            <svg width="800" height="500">
+                <p>This space is for the Spending Histogram</p>
+        </div>
+        <div class="col-md-4" id="age_vis">
+            <svg width="400" height="500">
+                <p>This space is for the Age Vis</p>
+        </div>
+    </div>
     <div class="row">
-      <div class="col-md-8" id="quality_vis">
-        <svg width = "800" height="500">
-        <p>This space is for the Quality Histogram</p>
-      </div>
-      <div class="col-md-4" id="race_vis">
-        <svg width = "400" height="500">
-        <p>This space is for the Race Vis</p>
-      </div>
-    </div> 
+        <div class="col-md-8" id="quality_vis">
+            <svg width="800" height="500">
+                <p>This space is for the Quality Histogram</p>
+        </div>
+        <div class="col-md-4" id="race_vis">
+            <svg width="400" height="500">
+                <p>This space is for the Race Vis</p>
+        </div>
+    </div>
     <div class="row">
-      <div class="col-md-8" id="scatter_vis">
-        <svg width = "800" height="500">
-        <p>This space is for the Spending vs Quality Scatterplot</p>
-      </div>
-      <div class="col-md-4" id="income_vis">
-        <svg width = "400" height="500">
-        <p>This space is for the Income Vis</p>
-      </div>
-    </div> 
-  </div>
+        <div class="col-md-8" id="scatter_vis">
+            <svg width="800" height="500">
+                <p>This space is for the Spending vs Quality Scatterplot</p>
+        </div>
+        <div class="col-md-4" id="income_vis">
+            <svg width="400" height="500">
+                <p>This space is for the Income Vis</p>
+        </div>
+    </div>
+</div>
 
+
+<!-- Add vis classes-->
+<script src="js/map.js"></script>
+<script src="js/infovis.js"></script>
+<script src="js/agevis.js"></script>
+<script src="js/racevis.js"></script>
+<script src="js/incomevis.js"></script>
+<script src="js/spendingvis.js"></script>
+<script src="js/qualityvis.js"></script>
+<script src="js/scattervis.js"></script>
 <script>
-  $(function(){
-    var mapData = [];
-    var hosData = [];
-    var county_age = [];
-    var state_age = [];
-    var county_race = [];
-    var state_race = [];
-    var county_income = [];
-    var spendingData = [];
-    var qualityData = [];
-    var scatterData = [];
-    var initVis = function(){
-      var MyEventHandler = new Object();
-      var map_vis = new MapVis(d3.select("#map_vis"), mapData, hosData, MyEventHandler);
-      var info_vis = new InfoVis(d3.select("#info_vis"), mapData, hosData, MyEventHandler);
-      var age_vis = new AgeVis(d3.select("#age_vis"), county_age, state_age, MyEventHandler);
-      var race_vis = new RaceVis(d3.select("#race_vis"), county_race, state_race, MyEventHandler);
-      var income_vis = new IncomeVis(d3.select("#income_vis"), county_income, MyEventHandler);
-      var spending_vis = new SpendingVis(d3.select("#spending_vis"), spendingData, MyEventHandler);
-      var quality_vis = new QualityVis(d3.select("#quality_vis"), qualityData, MyEventHandler);
-      var scatter_vis = new ScatterVis(d3.select("#scatter_vis"), scatterData, MyEventHandler);
-    
-      $(MyEventHandler).bind("selectionChanged", function(event, object){
-        info_vis.onSelectionChange(object);
-        age_vis.onSelectionChange(object);
-        race_vis.onSelectionChange(object);
-        income_vis.onSelectionChange(object);
-        spending_vis.onSelectionChange(object);
-        quality_vis.onSelectionChange(object);
-        scatter_vis.onSelectionChange(object);
-      })
-    }
-    var dataLoaded = function(error, _mapData, _hosData, _county_age, _state_age, _county_race, _state_race, _county_income, _spendingData, _qualityData, _scatterData){
-      if (!error){
-        mapData = _mapData;
-        hosData = _hosData;
-        county_age = _county_age;
-        state_age = _state_age;
-        county_race = _county_race;
-        state_race = _state_race;
-        county_income = _county_income;
-        spendingData = _spendingData;
-        qualityData = _qualityData;
-        scatterData = _scatterData;
-        initVis();
-      }
-    }
-    var startHere = function(){
-      queue()
-        .defer(d3.json, 'data/us.json')
-        .defer(d3.json, 'data/hospital_final.json')
-        .defer(d3.json, 'data/county_age.json')
-        .defer(d3.json, 'data/state_age.json')
-        .defer(d3.json, 'data/county_race.json')
-        .defer(d3.json, 'data/state_race.json')
-        .defer(d3.json, 'data/county_income.json')
-        .defer(d3.json, 'data/hospital_spendingData.json')
-        .defer(d3.json, 'data/quality_score.json')
-        .defer(d3.json, 'data/scatter.json')
-        .await(dataLoaded);
-    }
-    //Call startHere() function
-    startHere();
-  })
+    $(function () {
+        var mapData = [];
+        var hosData = [];
+        var county_age = [];
+        var state_age = [];
+        var county_race = [];
+        var state_race = [];
+        var county_income = [];
+        var spendingData = [];
+        var qualityData = [];
+        var scatterData = [];
+        var initVis = function () {
+            var MyEventHandler = new Object();
+//            var map_vis = new MapVis(d3.select("#map_vis"), mapData, hosData, MyEventHandler);
+            var map_vis = new MapVis(d3.select("#map_vis"), MyEventHandler);
+            var info_vis = new InfoVis(d3.select("#info_vis"), mapData, hosData, MyEventHandler);
+            var age_vis = new AgeVis(d3.select("#age_vis"), county_age, state_age, MyEventHandler);
+            var race_vis = new RaceVis(d3.select("#race_vis"), county_race, state_race, MyEventHandler);
+            var income_vis = new IncomeVis(d3.select("#income_vis"), county_income, MyEventHandler);
+
+            var spending_vis = new SpendingVis(d3.select("#spending_vis"), spendingData, hosData, MyEventHandler);
+            var quality_vis = new QualityVis(d3.select("#quality_vis"), qualityData, hosData, MyEventHandler);
+            var scatter_vis = new ScatterVis(d3.select("#scatter_vis"), scatterData, hosData, MyEventHandler);
+
+            $(MyEventHandler).bind("selectionChanged", function (event, object) {
+                info_vis.onSelectionChange(object);
+                age_vis.onSelectionChange(object);
+                race_vis.onSelectionChange(object);
+                income_vis.onSelectionChange(object);
+//                spending_vis.onSelectionChange(object);
+//                quality_vis.onSelectionChange(object);
+//                scatter_vis.onSelectionChange(object);
+            })
+
+            $(MyEventHandler).bind("mapSelectionChanged", function (event, object) {
+                spending_vis.onMapSelectionChanged(object);
+                quality_vis.onMapSelectionChanged(object);
+                scatter_vis.onMapSelectionChanged(object);
+            })
+
+            $(MyEventHandler).bind("mapSelectionHighlight", function (event, object) {
+                spending_vis.onMapSelectionHighlight(object);
+                quality_vis.onMapSelectionHighlight(object);
+                scatter_vis.onMapSelectionHighlight(object);
+            })
+        }
+        var dataLoaded = function (error, _mapData, _hosData, _county_age, _state_age, _county_race, _state_race, _county_income, _spendingData, _qualityData, _scatterData) {
+            if (!error) {
+                mapData = _mapData;
+                hosData = _hosData;
+                county_age = _county_age;
+                state_age = _state_age;
+                county_race = _county_race;
+                state_race = _state_race;
+                county_income = _county_income;
+                spendingData = _spendingData;
+                qualityData = _qualityData;
+                scatterData = _scatterData;
+                initVis();
+            }
+        }
+        var startHere = function () {
+            queue()
+                    .defer(d3.json, 'data/us.json')
+                    .defer(d3.json, 'data/hospital_final.json')
+                    .defer(d3.json, 'data/county_age.json')
+                    .defer(d3.json, 'data/state_age.json')
+                    .defer(d3.json, 'data/county_race.json')
+                    .defer(d3.json, 'data/state_race.json')
+                    .defer(d3.json, 'data/county_income.json')
+                    .defer(d3.json, 'data/hospital_spendingData.json')
+                    .defer(d3.json, 'data/quality_score.json')
+                    .defer(d3.json, 'data/scatter.json')
+                    .await(dataLoaded);
+        }
+        //Call startHere() function
+        startHere();
+    })
 </script>
 </body>
 </html>
