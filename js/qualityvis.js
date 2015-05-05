@@ -3,6 +3,8 @@ QualityVis = function(_parentElement, _qualityData, _eventHandler){
   this.qualityData = _qualityData;
   this.eventHandler = _eventHandler;
   this.displayData = [];
+  this.quality;
+  this.histarray;
   this.initVis();
 }
 
@@ -20,7 +22,8 @@ QualityVis.prototype.initVis = function(){
             this.displayData.push(this.qualityData[key])
         }
     }
-
+    console.log(d3.max(this.displayData, function(d){return d;}));
+    console.log(d3.min(this.displayData, function(d){return d;}));
     this.svg = this.svg
         .append("g") 
         .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
@@ -30,11 +33,6 @@ QualityVis.prototype.initVis = function(){
       .domain([d3.min(this.displayData, function(d){return d;}), d3.max(this.displayData, function(d){return d;})])
       .range([0, this.width-50]);
 
-    var hist = d3.layout.histogram()
-        .bins(this.x.ticks(50))
-        (this.displayData);
-
-    console.log(hist[0].dx);
     this.y = d3.scale.linear()
         .domain([0, 1000])
         .range([this.height-50, 0]);
@@ -43,34 +41,91 @@ QualityVis.prototype.initVis = function(){
       .scale(this.x)
       .orient("bottom");
 
-    // //Add bars
+    this.yAxis = d3.svg.axis()
+       .scale(this.y)
+       .ticks(6)
+       .orient("left");
 
-    this.bar = this.svg.selectAll(".bar")
+    this.svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + (this.height - 50) + ")")
+        .call(this.xAxis)
+        .selectAll("text")
+          .attr("y", 5)
+          .attr("x", 10)
+          .attr("transform", "rotate(45)")
+          //.attr("text-anchor",  "start")
+          //.style("text-anchor", "start")
+          .text(function(d,i) { return d})
+          .attr("font-size", 12);
+
+    this.svg.append("g")
+         .attr("class", "y axis")
+         .append("text")
+         .attr("transform", "rotate(-90)");
+
+    this.updateVis();
+
+}
+
+QualityVis.prototype.updateVis = function(){
+        // //Add bars
+    var that = this;
+    var hist = d3.layout.histogram()
+        .bins(this.x.ticks(50))
+        (this.displayData);
+
+    this.histarray = null; 
+    this.comparevalues(hist);
+
+    this.svg.selectAll(".bar1").remove();
+
+    var bar = this.svg.selectAll(".bar1")
         .data(hist)
-        .enter().append("g")
-        .attr("class", "bar")
+
+
+    bar.enter().append("g")
+        .attr("class", "bar1")
         .attr("transform", function(d) { return "translate(" + that.x(d.x) + "," + that.y(d.y) + ")"; });
 
-    this.bar.append("rect")
+    bar.append("rect")
         .attr("x", 1)
         .attr("width", (that.width-50)/50-3.5)
-        .attr("height", function(d){ return that.height - 50 - that.y(d.y)});
+        .attr("height", function(d){ return that.height - 50 - that.y(d.y)})
+        .attr("fill", function(d, i) {if (that.histarray == i){return "red"} else return "steelblue"}) 
 
     
     var formatCount = d3.format(",.0f");
 
-    this.bar.append("text")
+    bar.append("text")
         .attr("dy", ".75em")
         .attr("y", -20)
         // .attr("x", this.x(hist[0].dx) / 2)
         .attr("x", 5)
         .attr("text-anchor", "middle")
+        .attr("fill", "#aaa")
+        .attr("font-size", 8)
         .text(function(d) { return formatCount(d.y); })
-        .style("color", "#FFF");
+}
 
+QualityVis.prototype.comparevalues = function(d){
+    var that = this;
+    for (i = 0; i < d.length; i++)
+    {
+        for(e= 0; e< d[i].length; e++)
+        {
+            if (d[i][e] == that.quality || d[i][e] < that.quality && d[i][e+1] > that.quality)
+            {
+                that.histarray = i;
+            }
+        }
+    }
 }
 
 QualityVis.prototype.onSelectionChange = function(d){
     var that = this;
+    var hospital = d.properties.name;
+    this.quality = this.qualityData[hospital];
+    this.updateVis();
 }
 

@@ -3,6 +3,8 @@ SpendingVis = function(_parentElement, _spendingData, _eventHandler){
   this.spendingData = _spendingData;
   this.eventHandler = _eventHandler;
   this.displayData = [];
+  this.spending;
+  this.histarray;
   this.initVis();
 }
 
@@ -16,84 +18,132 @@ SpendingVis.prototype.initVis = function(){
     this.height = this.svg.attr("height") - this.margin.top - this.margin.bottom;
 
     for (var key in this.spendingData){
-    	if (this.spendingData[key]){
-    		this.displayData.push(this.spendingData[key])
-    	}
+      if (this.spendingData[key]){
+        this.displayData.push(this.spendingData[key])
+      }
     }
     
     this.svg = this.svg
-    	.append("g") 
-    	.attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+      .append("g") 
+      .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
     // creates axis and scales
     this.x = d3.scale.linear()
       .domain([0, 50000])
-      .range([0, this.width]);
-
+      .range([0, this.width]);  
     
-
-    var hist = d3.layout.histogram()
-    	.bins(this.x.ticks(20))
-    	(this.displayData);
-
     this.y = d3.scale.linear()
-    	.domain([0, 1000])
-      	.range([this.height-50, 0]);
-		
+        .domain([0, 1000])
+        .range([this.height-50, 0]);  
+
     this.xAxis = d3.svg.axis()
       .scale(this.x)
       .orient("bottom");
 
-    // this.yAxis = d3.svg.axis()
-    //   .scale(this.y)
-    //   .ticks(6)
-    //   .orient("left");
+    this.yAxis = d3.svg.axis()
+        .scale(this.y)
+        .ticks(6)
+        .orient("left");
+
+    // Add axes visual elements
+    this.svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + (this.height - 50) + ")")
+        .call(this.xAxis)
+        .selectAll("text")
+          .attr("y", 15)
+          .attr("x", 10)
+          .attr("transform", "rotate(45)")
+          //.attr("text-anchor",  "start")
+          //.style("text-anchor", "start")
+          .text(function(d,i) { return d})
+          .attr("font-size", 12);
+
+    this.svg.append("g")
+         .attr("class", "y axis")
+         .append("text")
+         .attr("transform", "rotate(-90)");
+
+    this.updateVis();
+    
+
+}
+
+SpendingVis.prototype.updateVis = function() {
+
+    var that = this;
+
+    var hist = d3.layout.histogram()
+        .bins(this.x.ticks(20))
+        (this.displayData);
 
     // //Add bars
+    this.histarray = null; 
+    this.comparevalues(hist);
 
-    this.bar = this.svg.selectAll(".bar")
-    	.data(hist)
-    	.enter().append("g")
-    	.attr("class", "bar")
-    	.attr("transform", function(d) { return "translate(" + that.x(d.x) + "," + that.y(d.y) + ")"; });
+    this.svg.selectAll(".bar1").remove();
 
-    this.bar.append("rect")
-    	.attr("x", 1)
-    	.attr("width", this.x(hist[1].dx)-1)
-    	.attr("height", function(d){ return that.height - 50 - that.y(d.y)});
+    var bar = this.svg.selectAll(".bar1")
+        .data(hist)
+
+    bar.exit().remove();
+
+        bar.enter().append("g")
+        .attr("class", "bar1")
+        .attr("transform", function(d) { return "translate(" + that.x(d.x) + "," + that.y(d.y) + ")"; });
+
+    bar.append("rect")
+        .attr("x", 1)
+        .attr("width", this.x(hist[1].dx)-1)
+        .attr("height", function(d){ return that.height - 50 - that.y(d.y)})
+        .attr("fill", function(d, i) {if (that.histarray == i){return "yellow";} else{return "steelblue";}}) 
+
 
     
     var formatCount = d3.format(",.0f");
 
-    this.bar.append("text")
-    	.attr("dy", ".75em")
-    	.attr("y", -20)
-    	.attr("x", this.x(hist[0].dx) / 2)
-    	.attr("text-anchor", "middle")
-    	.text(function(d) { return formatCount(d.y); })
-    	.style("color", "#FFF");
-    // // Add axes visual elements
-    // this.svg.append("g")
-    //     .attr("class", "x axis")
-    //     .attr("transform", "translate(0," + (this.height - 150) + ")")
-    //     .call(this.xAxis)
-    //     // .selectAll("text")
-    //     //   .attr("y", 5)
-    //     //   .attr("x", 10)
-    //     //   .attr("transform", "rotate(45)")
-    //     //   .attr("text-anchor",  "start")
-    //     //   .style("text-anchor", "start")
-    //     //   .text(function(d,i) { return that.age_domain[i]})
-    //     //   .attr("font-size", 8);
+    bar.append("text")
+        .attr("dy", ".75em")
+        .attr("y", -20)
+        .attr("x", this.x(hist[0].dx) / 2)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#aaa")
+        .text(function(d) { return formatCount(d.y); })
+        
+        
+}
 
-    // this.svg.append("g")
-    //     .attr("class", "y axis")
-    //     .append("text")
-    //     .attr("transform", "rotate(-90)")
+SpendingVis.prototype.comparevalues = function(d){
+    var that = this;
+    for (i = 0; i < d.length; i++)
+    {
+        for(e= 0; e< d[i].length; e++)
+        {
+            if (d[i][e] == that.spending || d[i][e] < that.spending && d[i][e+1] > that.spending)
+            {
+                that.histarray = i;
+            }
+        }
+    }
 }
 
 SpendingVis.prototype.onSelectionChange = function(d){
-	var that = this;
-	console.log(d);	
+  var that = this;
+    var hospital = d.properties.name;
+    this.spending = this.spendingData[hospital];
+    this.updateVis();
+  //console.log(this.spending); 
 }
+
+/*
+
+
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #aaa;
+*/
 
