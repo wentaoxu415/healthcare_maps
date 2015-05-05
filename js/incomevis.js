@@ -97,7 +97,7 @@ IncomeVis.prototype.updateVis = function(){
             return (that.y(d));
         })
        .attr("height", function(d){return that.height - 150 - that.y(d);})
-       .attr("fill", "green");
+       .attr("fill", "yellow");
 
     var tip = d3.tip()
       .attr('class', 'd3-tip')
