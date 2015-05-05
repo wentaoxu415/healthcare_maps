@@ -1,5 +1,6 @@
-ScatterVis = function(_parentElement, _scatterData, _eventHandler){
+ScatterVis = function(_parentElement, _hosData, _scatterData, _eventHandler){
   this.parentElement = _parentElement;
+  this.hosData = _hosData;
   this.scatterData = _scatterData;
   this.eventHandler = _eventHandler;
   this.displayData = [];
@@ -69,6 +70,7 @@ ScatterVis.prototype.initVis = function(){
 		.attr("r", 2.5)
 		.attr("cx", function(d){return that.x(d["spending"])})
 		.attr("cy", function(d){return that.y(d["quality"])})
+
 
 }
 

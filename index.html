@@ -10,6 +10,7 @@
   <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
   <script src="libs/topojson/topojson.v1.min.js"></script>
   <script src="libs/queue/queue.v1.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
   <!-- Add stylesheets -->
   <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
@@ -105,7 +106,7 @@
       var income_vis = new IncomeVis(d3.select("#income_vis"), county_income, MyEventHandler);
       var spending_vis = new SpendingVis(d3.select("#spending_vis"), spendingData, MyEventHandler);
       var quality_vis = new QualityVis(d3.select("#quality_vis"), qualityData, MyEventHandler);
-      var scatter_vis = new ScatterVis(d3.select("#scatter_vis"), scatterData, MyEventHandler);
+      var scatter_vis = new ScatterVis(d3.select("#scatter_vis"), hosData, scatterData, MyEventHandler);
     
       $(MyEventHandler).bind("selectionChanged", function(event, object){
         info_vis.onSelectionChange(object);

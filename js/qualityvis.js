@@ -91,7 +91,7 @@ QualityVis.prototype.updateVis = function(){
         .attr("x", 1)
         .attr("width", (that.width-50)/50-4)
         .attr("height", function(d){ return that.height - 50 - that.y(d.y)})
-        .attr("fill", function(d, i) {if (that.histarray == i){return "red"} else return "steelblue"}) 
+        .attr("fill", function(d, i) {if (that.histarray == i){return "yellow"} else return "steelblue"}) 
 
     
     var formatCount = d3.format(",.0f");

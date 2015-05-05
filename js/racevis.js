@@ -86,10 +86,6 @@ RaceVis.prototype.updateVis = function(){
 
     this.y.domain([0, 100]);
 
-    console.log(tempdata);
-    console.log(d3.max(tempdata));
-
-
      // Data join
     //var bar_g = this.svg.append("g");
     var bar = this.svg.selectAll(".cbar")
@@ -104,13 +100,12 @@ RaceVis.prototype.updateVis = function(){
         .append("rect")
         .attr("class", "cbar")
         .attr("x", function(d,i){
-           console.log("hi"); return  that.x(i);
+            return  that.x(i);
         })
        .attr("width", (that.width/11));
 
     // adds bar features
     bar.attr("y", function(d) {
-            console.log(that.y(d)); 
             return (that.y(d));
         })
        .attr("height", function(d){return that.height - 150 - that.y(d);})
@@ -129,13 +124,12 @@ RaceVis.prototype.updateVis = function(){
         .append("rect")
         .attr("class", "sbar")
         .attr("x", function(d,i){
-           console.log("hi"); return  that.x(i) + (that.width/10);
+           return  that.x(i) + (that.width/10);
         })
        .attr("width", (that.width/11));
 
     // adds bar features
     sbar.attr("y", function(d) {
-            console.log(that.y(d)); 
             return (that.y(d));
         })
        .attr("height", function(d){return that.height - 150 - that.y(d);})
@@ -144,11 +138,9 @@ RaceVis.prototype.updateVis = function(){
 
 RaceVis.prototype.onSelectionChange = function(d){
   var that = this;
-  console.log(d);
   var county = d.properties.county.toLowerCase();
   var state = d.properties.state;
   this.displayData = that.county_race[county];
   this.displayDataState = that.state_demo[state]
-  console.log(this.displayDataState);
   this.updateVis();
 }
