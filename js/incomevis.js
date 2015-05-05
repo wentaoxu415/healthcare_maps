@@ -73,7 +73,6 @@ IncomeVis.prototype.updateVis = function(){
 
     this.y.domain([0, 100]);
 
-
      // Data join
     //var bar_g = this.svg.append("g");
     var bar = this.svg.selectAll(".bar")
@@ -127,6 +126,5 @@ IncomeVis.prototype.datawrangle = function(d){
   {
     that.percentagedata.push(d[i]/that.total*100);
   }
-  //console.log(this.percentagedata);
 
 }
