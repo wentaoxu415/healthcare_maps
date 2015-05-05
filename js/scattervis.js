@@ -35,9 +35,7 @@ ScatterVis.prototype.initVis = function () {
         // .domain(d3.extent(this.displayData, function (d) {
         //     return d["quality"];
         // })).nice()
-        .domain(d3.extent(this.displayData, function (d) {
-            return d["quality"];
-        })).nice()
+        .domain([-30, 35])
         .range([0, this.height]);
 
     this.xAxis = d3.svg.axis()
