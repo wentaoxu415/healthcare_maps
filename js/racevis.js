@@ -1,11 +1,12 @@
 RaceVis = function(_parentElement, _county_race, _state_demo, _eventHandler){
-	this.parentElement = _parentElement;
-	this.county_race = _county_race;
-	this.state_demo = _state_demo;
-	this.eventHandler = _eventHandler;
-	this.displayData = [];
-	this.age_domain = ["black", "hispanic", "white", "other"]
-	this.initVis();
+  this.parentElement = _parentElement;
+  this.county_race = _county_race;
+  this.state_demo = _state_demo;
+  this.eventHandler = _eventHandler;
+  this.displayData = [];
+  this.displayDataState = [];
+  this.age_domain = ["black", "hispanic", "white", "other"]
+  this.initVis();
 }
 
 RaceVis.prototype.initVis = function(){
@@ -27,8 +28,7 @@ RaceVis.prototype.initVis = function(){
       .domain(d3.range(0, that.age_domain.length));
 
     this.y = d3.scale.linear()
-      	.range([this.height - 150, 0])
-		.domain([0, 100]);
+      .range([this.height - 150, 0]);
 
     this.xAxis = d3.svg.axis()
       .scale(this.x)
@@ -51,7 +51,7 @@ RaceVis.prototype.initVis = function(){
           .attr("text-anchor",  "start")
           .style("text-anchor", "start")
           .text(function(d,i) { return that.age_domain[i]})
-          .attr("font-size", 12);
+          .attr("font-size", 8);
 
     this.svg.append("g")
         .attr("class", "y axis")
@@ -61,9 +61,9 @@ RaceVis.prototype.initVis = function(){
 }
 
 RaceVis.prototype.updateVis = function(){
-	var that = this;
+  var that = this;
 
-	// set y scale domain to max value of count aggregate
+  // set y scale domain to max value of count aggregate
 
 
     // calls y Axis
@@ -77,10 +77,22 @@ RaceVis.prototype.updateVis = function(){
     tempdata.push(this.displayData["white"]);
     tempdata.push(this.displayData["other"]);
 
-   
+    var stempdata = [];
+
+    stempdata.push(this.displayDataState["black"]);
+    stempdata.push(this.displayDataState["hispanic"]);
+    stempdata.push(this.displayDataState["white"]);
+    stempdata.push(this.displayDataState["other"]);
+
+    this.y.domain([0, 100]);
+
+    console.log(tempdata);
+    console.log(d3.max(tempdata));
+
+
      // Data join
     //var bar_g = this.svg.append("g");
-    var bar = this.svg.selectAll(".bar")
+    var bar = this.svg.selectAll(".cbar")
       .data(tempdata);
 
     // removes unneeded bars
@@ -90,14 +102,40 @@ RaceVis.prototype.updateVis = function(){
     // Append new bar groups, if required
     bar.enter()
         .append("rect")
-        .attr("class", "bar")
+        .attr("class", "cbar")
         .attr("x", function(d,i){
-        	return  that.x(i);
+           console.log("hi"); return  that.x(i);
         })
-       .attr("width", (that.width/5));
+       .attr("width", (that.width/11));
 
     // adds bar features
     bar.attr("y", function(d) {
+            console.log(that.y(d)); 
+            return (that.y(d));
+        })
+       .attr("height", function(d){return that.height - 150 - that.y(d);})
+       .attr("fill", "green");
+
+    //STATEBAR
+    var sbar = this.svg.selectAll(".sbar")
+      .data(stempdata);
+
+    // removes unneeded bars
+    sbar.exit()
+      .remove();
+
+    // Append new bar groups, if required
+    sbar.enter()
+        .append("rect")
+        .attr("class", "sbar")
+        .attr("x", function(d,i){
+           console.log("hi"); return  that.x(i) + (that.width/10);
+        })
+       .attr("width", (that.width/11));
+
+    // adds bar features
+    sbar.attr("y", function(d) {
+            console.log(that.y(d)); 
             return (that.y(d));
         })
        .attr("height", function(d){return that.height - 150 - that.y(d);})
@@ -105,10 +143,12 @@ RaceVis.prototype.updateVis = function(){
 }
 
 RaceVis.prototype.onSelectionChange = function(d){
-	var that = this;
-  
-	var county = d.properties.county.toLowerCase();
-	this.displayData = that.county_race[county];
-  
-	this.updateVis();
+  var that = this;
+  console.log(d);
+  var county = d.properties.county.toLowerCase();
+  var state = d.properties.state;
+  this.displayData = that.county_race[county];
+  this.displayDataState = that.state_demo[state]
+  console.log(this.displayDataState);
+  this.updateVis();
 }
