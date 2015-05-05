@@ -34,7 +34,7 @@ ScatterVis.prototype.initVis = function () {
         //     return d["quality"];
         // })).nice()
         .domain(d3.extent(this.displayData, function (d) {
-            return -1*d["quality"];
+            return d["quality"];
         })).nice()
         .range([this.height, 0]);
 
