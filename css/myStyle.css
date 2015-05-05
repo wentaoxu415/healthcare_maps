@@ -7,7 +7,7 @@ span {
 }
 
 body{
-    background-color: #FF6600;
+    background-color: #FCFCFC;
 }
 .row {
     margin: 40px 0;
@@ -159,4 +159,8 @@ div.tooltip {
 
 #map_vis > form {
     text-align: center;
+}
+
+#header{
+    padding-top: 30px;
 }

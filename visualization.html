@@ -73,10 +73,13 @@
     </nav>
 
 <div class="container">
-    <h1>Healthcare Maps</h1>
+    <h1 id="header">HEALTHCARE MAPS</h1>
 
     <div class="row">
         <div class="col-md-8" id="map_vis">
+            <svg width="800" height="500">
+        </div>
+        <div class="col-md-3" id="map_des">
             <form>
                 <select>
                     <option value="NonWhite">Non-white</option>
@@ -84,9 +87,6 @@
                     <option value="Income">Income</option>
                 </select>
             </form>
-            <svg width="800" height="500">
-        </div>
-        <div class="col-md-3" id="map_des">
         </div>    
     </div>
     <div class="row">
@@ -221,5 +221,12 @@
         startHere();
     })
 </script>
+<!-- Plugin JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.fittext.js"></script>
+<script src="js/wow.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="js/creative.js"></script>
 </body>
 </html>
