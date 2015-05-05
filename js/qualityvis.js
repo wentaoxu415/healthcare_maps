@@ -20,8 +20,7 @@ QualityVis.prototype.initVis = function(){
             this.displayData.push(this.qualityData[key])
         }
     }
-    console.log(d3.max(this.displayData, function(d){return d;}));
-    console.log(d3.min(this.displayData, function(d){return d;}));
+
     this.svg = this.svg
         .append("g") 
         .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
@@ -43,11 +42,6 @@ QualityVis.prototype.initVis = function(){
     this.xAxis = d3.svg.axis()
       .scale(this.x)
       .orient("bottom");
-
-    // this.yAxis = d3.svg.axis()
-    //   .scale(this.y)
-    //   .ticks(6)
-    //   .orient("left");
 
     // //Add bars
 
@@ -73,24 +67,7 @@ QualityVis.prototype.initVis = function(){
         .attr("text-anchor", "middle")
         .text(function(d) { return formatCount(d.y); })
         .style("color", "#FFF");
-    // // Add axes visual elements
-    // this.svg.append("g")
-    //     .attr("class", "x axis")
-    //     .attr("transform", "translate(0," + (this.height - 150) + ")")
-    //     .call(this.xAxis)
-    //     // .selectAll("text")
-    //     //   .attr("y", 5)
-    //     //   .attr("x", 10)
-    //     //   .attr("transform", "rotate(45)")
-    //     //   .attr("text-anchor",  "start")
-    //     //   .style("text-anchor", "start")
-    //     //   .text(function(d,i) { return that.age_domain[i]})
-    //     //   .attr("font-size", 8);
 
-    // this.svg.append("g")
-    //     .attr("class", "y axis")
-    //     .append("text")
-    //     .attr("transform", "rotate(-90)")
 }
 
 QualityVis.prototype.onSelectionChange = function(d){
