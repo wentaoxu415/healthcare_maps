@@ -114,7 +114,7 @@ RaceVis.prototype.updateVis = function () {
         .attr("height", function (d) {
             return that.height - 150 - that.y(d);
         })
-        .attr("fill", "yellow");
+        .attr("fill", "#FFCC00");
 
     //STATEBAR
     var sbar = this.svg.selectAll(".sbar")
