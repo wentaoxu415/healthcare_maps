@@ -108,7 +108,7 @@ MapVis.prototype.initVis = function () {
     queue()
         .defer(d3.json, "data/us.json")
         .defer(d3.csv, "data/allData.csv")
-        .defer(d3.json, "data/hospital.json")
+        .defer(d3.json, "data/hospital_final.json")
         .defer(d3.tsv, "data/us-state-names.tsv")
         .defer(d3.json, "data/state_demographics.json")
         .defer(d3.json, "data/county_demographics.json")
