@@ -29,7 +29,8 @@ ScatterVis.prototype.initVis = function () {
         })).nice()
         .range([0, this.width]);
 
-    console.log(d3.min(this.displayData, function(d){return d["spending"];}))
+    console.log(d3.min(this.displayData, function(d){return d["quality"];}))
+    console.log(d3.max(this.displayData, function(d){return d["quality"];}))
     this.y = d3.scale.linear()
         // .domain(d3.extent(this.displayData, function (d) {
         //     return d["quality"];
