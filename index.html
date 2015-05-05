@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8">
-  <title>American Hospital Visualization</title>
+  <title>Healthcare Maps</title>
   
   <!-- Add Libraries-->
   <script src="libs/d3/d3.v3.min.js"></script>
@@ -29,12 +29,13 @@
 </head>
 <body>
   <div class="container">
-    <h1>American Hospital Visualization</h1>
+    <h1>Healthcare Maps</h1>
     <div class="row">
       <div class="col-md-8" id="map_vis">
         <svg width = "800" height="500">
       </div>
-      <div class="col-md-4 right" id="info_vis">
+      <div class="col-md-3 right" id="info_vis">
+        <h3>Hospital Info</h3>
           <span id="hospital_name">Name: </span>
           <span id="hospital_address">Address: </span>
           <span id="hospital_city">City: </span>
@@ -43,35 +44,43 @@
           <span id="hospital_type">Hospital Type: </span>
       </div> 
     </div>
+    <hr class="hori_line">
     <div class="row">
-      <div class="col-md-8" id="spending_vis">
-        <svg width = "800" height="500">
-        <p>This space is for the Spending Histogram</p>
+      <div class="col-md-12" id="spending_vis">
+        <h3>Hospital Spending</h3>
+        <svg width = "1200" height="500">
       </div>
-      <div class="col-md-4" id="age_vis">
-        <svg width = "400" height="500">
-        <p>This space is for the Age Vis</p>
-      </div>
-    </div> 
+    </div>
+    <hr class="hori_line">
     <div class="row">
-      <div class="col-md-8" id="quality_vis">
-        <svg width = "800" height="500">
-        <p>This space is for the Quality Histogram</p>
+        <div class="col-md-12" id="quality_vis">
+        <h3>Hospital Quality</h3>
+        <svg width = "1200" height="500">
       </div>
-      <div class="col-md-4" id="race_vis">
-        <svg width = "400" height="500">
-        <p>This space is for the Race Vis</p>
-      </div>
-    </div> 
+    </div>
+    <hr class="hori_line">
     <div class="row">
-      <div class="col-md-8" id="scatter_vis">
-        <svg width = "800" height="500">
-        <p>This space is for the Spending vs Quality Scatterplot</p>
+        <h3>Hospital Spending vs. Hospital Quality</h3>
+        <div class="col-md-12" id="scatter_vis">
+        <svg width = "1200" height="500">
       </div>
-      <div class="col-md-4" id="income_vis">
-        <svg width = "400" height="500">
-        <p>This space is for the Income Vis</p>
-      </div>
+    </div>
+    <hr class="hori_line">
+    <div class="row">
+        <h3>Demographic Data</h3>
+        
+        <div class="col-md-4" id="age_vis">
+            <h5>Age Distribution</h5>
+            <svg width = "400" height="500">
+        </div>
+        <div class="col-md-4" id="race_vis">
+            <h5>Race Distribution</h5>
+            <svg width = "400" height="500">
+        </div>
+        <div class="col-md-4" id="income_vis">
+            <h5>Income Distribution</h5>
+            <svg width = "400" height="500">
+        </div>
     </div> 
   </div>
 

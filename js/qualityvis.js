@@ -22,8 +22,7 @@ QualityVis.prototype.initVis = function(){
             this.displayData.push(this.qualityData[key])
         }
     }
-    console.log(d3.max(this.displayData, function(d){return d;}));
-    console.log(d3.min(this.displayData, function(d){return d;}));
+
     this.svg = this.svg
         .append("g") 
         .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
@@ -90,7 +89,7 @@ QualityVis.prototype.updateVis = function(){
 
     bar.append("rect")
         .attr("x", 1)
-        .attr("width", (that.width-50)/50-3.5)
+        .attr("width", (that.width-50)/50-4)
         .attr("height", function(d){ return that.height - 50 - that.y(d.y)})
         .attr("fill", function(d, i) {if (that.histarray == i){return "red"} else return "steelblue"}) 
 
@@ -99,11 +98,11 @@ QualityVis.prototype.updateVis = function(){
 
     bar.append("text")
         .attr("dy", ".75em")
-        .attr("y", -20)
+        .attr("y", -12)
         // .attr("x", this.x(hist[0].dx) / 2)
-        .attr("x", 5)
+        .attr("x", 10)
         .attr("text-anchor", "middle")
-        .attr("fill", "#aaa")
+        .attr("fill", "#000000")
         .attr("font-size", 8)
         .text(function(d) { return formatCount(d.y); })
 }

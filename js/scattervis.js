@@ -4,6 +4,7 @@ ScatterVis = function(_parentElement, _scatterData, _eventHandler){
   this.eventHandler = _eventHandler;
   this.displayData = [];
   this.initVis();
+  
 }
 
 ScatterVis.prototype.initVis = function(){

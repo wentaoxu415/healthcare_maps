@@ -107,7 +107,7 @@ SpendingVis.prototype.updateVis = function() {
         .attr("y", -20)
         .attr("x", this.x(hist[0].dx) / 2)
         .attr("text-anchor", "middle")
-        .attr("fill", "#aaa")
+        .attr("fill", "#000000")
         .text(function(d) { return formatCount(d.y); })
         
         

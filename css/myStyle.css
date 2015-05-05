@@ -2,21 +2,49 @@ h1{
    text-align: center;
 }
 
+h3{
+  text-align: center; 
+}
+
+h5{
+ text-align: center;  
+}
 span{
   display: block;
 }
 
+body{
+  /*background-color: #FFBA8D;*/
+  background-color: #FFCC99;
+}
+
+.hori_line{
+  height: 24px;
+  border-color: #000000;
+  color: #000000;
+}
+.container{
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  
+}
 .right{
   float: right;
-  padding-left: 50px;
-  padding-top: 20px;
-}
-
-#infovis{
+  border-radius: 25px;
+  padding-top: 10px;
+  background-color: #E1E1E1;
   height: 500px;
-  width: 400px;
+  opacity: 0.8;
+  font-size: 14px;
 }
 
+/*#infovis{
+  padding-left: 50px;
+  margin-left: 50px;
+  font-size: 48px;
+  
+
+}
+*/
 .background {
   fill: none;
   pointer-events: all;
