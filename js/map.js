@@ -128,8 +128,9 @@ MapVis.prototype.initVis = function () {
         var incomePpl = [1, 5000, 17500, 37500, 62500, 150000, 300000];
 
         allData = allPop;
+        console.log(allPop);
         console.log(allData);
-        
+
         allData.forEach(function (item) {
 
             // Parsing data for demographics
