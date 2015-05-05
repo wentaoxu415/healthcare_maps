@@ -82,7 +82,6 @@
     var county_race = [];
     var spendingData = [];
     var county_income = [];
-
     var initVis = function(){
       var MyEventHandler = new Object();
       var map_vis = new MapVis(d3.select("#map_vis"), mapData, hosData, MyEventHandler);
@@ -97,7 +96,6 @@
         spending_vis.onSelectionChange(object);
       })
     }
-
     var dataLoaded = function(error, _mapData, _hosData, _county_demo, _state_demo, _county_race, _spendingData, _county_income){
       if (!error){
         mapData = _mapData;
@@ -110,7 +108,6 @@
         initVis();
       }
     }
-
     var startHere = function(){
       queue()
         .defer(d3.json, 'data/us.json')
@@ -122,7 +119,6 @@
         //.defer(d3.json, 'data/county_income.json')
         .await(dataLoaded);
     }
-
     //Call startHere() function
     startHere();
   })

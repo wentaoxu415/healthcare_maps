@@ -103,10 +103,3 @@ MapVis.prototype.zoomed = function(that){
 	that.projection.translate(d3.event.translate).scale(d3.event.scale);
 	that.g.selectAll("path").attr("d", that.path);
 }
-
-// MapVis.prototype.display = function(d, that){
-// 	console.log("data", d);
-// 	$(that.eventHandler).trigger("selectionChanged", d);
-// }
-
-

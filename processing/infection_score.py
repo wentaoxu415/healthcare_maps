@@ -1,21 +1,36 @@
 import json
 import csv 
 
-infection_score = dict()
+score = dict()
 
-in_file = "../data/infection_hospital.csv"
-out_file = open("../data/infection_score.json", "w")
+infection_file = "../data/infection_hospital.csv"
+complication_file = "../data/complication.csv"
+out_file = open("../data/quality_score.json", "w")
 
-with open(in_file, 'rU') as infection_fh:
+with open(infection_file, 'rU') as infection_fh:
 	infection_csv = csv.reader(infection_fh, delimiter=',', quotechar='"')
 	next(infection_csv, None)
 
 	for row in infection_csv:
-		if row[1] not in infection_score:
-			infection_score[row[1]] = 0 
+		if row[1] not in score:
+			score[row[1]] = 0 
 		if row[10] == "Better than the U.S. National Benchmark":
-			infection_score[row[1]] += 1
+			score[row[1]] += 1
+			print "infect_good", score[row[1]]
 		elif row[10] == "Worse than the U.S. National Benchmark":
-			infection_score[row[1]] -= 1
+			score[row[1]] -= 1
+			print "infect_bad", score[row[1]]
 
-	json.dump(infection_score, out_file, indent=4)
+with open(complication_file, 'rU') as complication_fh:
+	complication_csv = csv.reader(complication_fh, delimiter=",", quotechar='"')
+	next(complication_csv, None)
+
+	for row in complication_csv:
+		if row[10] == "Better than the U.S. National Benchmark":
+			score[row[1]] += 1
+			print "complicate_good", score[row[1]]
+		elif row[10] == "Worse than the U.S. National Benchmark":
+			score[row[1]] -= 1
+			print "complicate_bad", score[row[1]]
+
+json.dump(score, out_file, indent=4)
