@@ -2,6 +2,14 @@ h1 {
     text-align: center;
 }
 
+h3{
+    text-align: center;
+}
+
+h5{
+    text-align: center;
+}
+
 span {
     display: block;
 }
@@ -9,6 +17,7 @@ span {
 body{
     background-color: #FCFCFC;
 }
+
 .row {
     margin: 40px 0;
 }
