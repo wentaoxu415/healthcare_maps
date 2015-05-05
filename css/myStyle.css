@@ -6,6 +6,9 @@ span {
     display: block;
 }
 
+body{
+    background-color: #FF6600;
+}
 .row {
     margin: 40px 0;
 }
