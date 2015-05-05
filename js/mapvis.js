@@ -7,66 +7,6 @@ MapVis = function(_parentElement, _mapData, _hosData, _eventHandler){
 	this.initVis();
 }
 
-MapVis.prototype.color_dot = function(d){
-	console.log(d.properties.owner)
-	if (d.properties.owner == 'Voluntary non-profit - Private'){
-		return "blue";
-	}
-	else if (d.properties.owner == 'Voluntary non-profit - Church'){
-		return "blue";
-	}
-	else if (d.properties.owner == 'Voluntary non-profit - Other'){
-		return "blue";
-	}
-	else if (d.properties.owner == 'Government - Hospital District or Authority') {
-		return "blue";
-	}
-	else if (d.properties.owner == 'Government - Local')
-		return "blue";
-	else if (d.properties.owner == 'Government - State')
-		return "blue";
-	else if (d.properties.owner == 'Government Federal') 
-		return "blue";
-	else if (d.properties.owner =='Government - Federal'){
-		return "blue";
-	}
-	else if(d.properties.owner == 'Proprietary'){
-		return "blue";
-	}
-	else if(d.properties.owner == 'Physician'){
-		return "blue";
-	}
-	else if (d.properties.owner == 'Tribal'){
-		return "blue";
-	}
-		// case 
-		// 	return "#FF66CC";
-		// case :
-		// 	return "#FF6600";
-		// case 'Voluntary non-profit - Other':
-		// 	return "#800000";
-		// case 'Government - Hospital District or Authority':
-		// 	return "#00FFCC";
-		// case 'Government - Local':
-		// 	return "#00FF00";
-		// case 'Government - State':
-		// 	return "#009900";
-		// case 'Government - State':
-		// 	return "#003300";
-		// case 'Government Federal':
-		// 	return "#003300";
-		// case 'Proprietary':
-		// 	return "#0066FF";
-		// case 'Physician':
-		// 	return "#0000CC";
-		// case 'Tribal':
-		// 	return "#666699";
-
-}
-MapVis.prototype.displayblue = function(d){
-	console.log("hey")
-	return "blue";
-}
 MapVis.prototype.initVis = function(){
 	var that = this;
 
@@ -89,7 +29,7 @@ MapVis.prototype.initVis = function(){
     	.translate([this.width / 2, this.height / 2]);
 
     this.path = d3.geo.path()
-    	.pointRadius([0.1])
+    	.pointRadius([2.5])
     	.projection(this.projection)
    	
 
@@ -175,12 +115,22 @@ MapVis.prototype.clicked = function(d, that){
 		y = centroid[1]
 		k = 4;
 		that.centered = d;
+		that.path
+			.pointRadius([0.75])
+    		.projection(this.projection)
+    	that.g.selectAll("path").attr("d", that.path);
 	}
 	else{
 		x = that.width/2;
 		y = that.height/2;
 		k = 1;
 		that.centered = null;
+		that.path
+			.pointRadius([2.5])
+    		.projection(this.projection)
+    	that.g.selectAll("path").attr("d", that.path);
+
+
 	}
 
 	that.g.selectAll("path")

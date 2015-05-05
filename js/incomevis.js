@@ -73,7 +73,7 @@ IncomeVis.prototype.updateVis = function(){
 
     this.y.domain([0, 100]);
 
-
+    this.svg.selectAll(".bar").remove();
      // Data join
     //var bar_g = this.svg.append("g");
     var bar = this.svg.selectAll(".bar")
