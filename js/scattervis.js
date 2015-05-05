@@ -37,11 +37,11 @@ ScatterVis.prototype.initVis = function () {
         .range([0, this.height]);
 
     this.xAxis = d3.svg.axis()
-        // .scale(this.x)
+        .scale(this.x)
         .orient("bottom");
 
     this.yAxis = d3.svg.axis()
-        .scale(this.y)
+        // .scale(this.y)
         .orient("left");
 
     this.svg = this.svg.append("g")
