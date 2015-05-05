@@ -18,6 +18,11 @@ body{
     background-color: #FCFCFC;
 }
 
+hr{
+    height: 5px;
+    color: #FF6600
+    background-color: #FF6600;
+}
 .row {
     margin: 40px 0;
 }
