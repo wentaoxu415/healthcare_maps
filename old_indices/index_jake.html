@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,300,400,600,700,800' rel='stylesheet' type='text/css'>
+  <style>
+
+  body {
+      margin: 0;
+      background-color: #faf8ef;
+      font-family: 'Open Sans', sans-serif;
+    }  
+
+  .land-glow {
+    fill-opacity: .2;
+    filter: url(#blur);
+  }
+
+  #main {
+    text-align: center;
+    width: 960px;
+    margin: 0 auto;
+  }
+
+  #map {
+    width: 960px;
+    margin: 0 auto;
+  }
+
+  .background {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .feature {
+    fill: #ccc;
+    cursor: pointer;
+  }
+
+  .feature.active {
+    fill: orange;
+  }
+
+  .mesh {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .counties {
+    fill: rgb(248, 253, 174);
+    stroke: #fff;
+    cursor: pointer;
+  }
+
+  div.tooltip {
+      position: absolute;
+      text-align: left;
+      display: inline;
+      padding: 6px;
+      font-size: 13px;
+      background-color: #ccc;
+      border: 0px;
+      border-radius: 2px;
+      pointer-events: none;
+      color: #000;
+  }  
+
+  </style>
+  <title>Population in US</title>
+</head>
+<body>
+
+<div id="main">
+  <h1>Population in US</h1>
+  <p>
+  Click on state to zoom in and show counties. Click on zoomed state again to zoom out.
+  </p>
+  <div id="map"></div>
+</div>
+
+<script src="js/d3.v3.min.js"></script>
+<script src="js/topojson.v1.min.js"></script>
+<script src="js/queue.v1.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
