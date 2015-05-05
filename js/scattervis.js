@@ -29,6 +29,7 @@ ScatterVis.prototype.initVis = function () {
         })).nice()
         .range([0, this.width]);
 
+    console.log(d3.min(this.displayData, function(d){return d["spending"];}))
     this.y = d3.scale.linear()
         // .domain(d3.extent(this.displayData, function (d) {
         //     return d["quality"];
@@ -43,7 +44,7 @@ ScatterVis.prototype.initVis = function () {
         .orient("bottom");
 
     this.yAxis = d3.svg.axis()
-        .scale(-this.y)
+        .scale(this.y)
         .orient("left");
 
     this.svg = this.svg.append("g")
