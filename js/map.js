@@ -122,7 +122,9 @@ MapVis.prototype.initVis = function () {
             changeMap(selected);
             changeCounties(selected);
         });
-        console.log(us_states_names);
+        if (!error){
+
+ 
         usStates = us_states_names;
 
         var incomePpl = [1, 5000, 17500, 37500, 62500, 150000, 300000];
@@ -209,7 +211,7 @@ MapVis.prototype.initVis = function () {
                 return h.properties['county'];
             })
             .entries(hospitals['features']);
-
+        }
         numHospitalsByState = hospitalsByStateAndCounty.reduce(function (map, d) {
             map[d.key] = d3.sum(d.values.map(function (c) {
                 return c.values.length;
