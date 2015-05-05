@@ -1,55 +1,56 @@
-h1{
-   text-align: center;
+h1 {
+    text-align: center;
 }
 
-span{
-  display: block;
+span {
+    display: block;
 }
 
 .row {
     margin: 40px 0;
 }
 
-.right{
-  float: right;
-  padding-left: 50px;
-  padding-top: 20px;
+.right {
+    float: right;
+    padding-left: 50px;
+    padding-top: 20px;
 }
 
-#infovis{
-  height: 500px;
-  width: 400px;
+#infovis {
+    height: 500px;
+    width: 400px;
 }
 
 .background {
-  fill: none;
-  pointer-events: all;
+    fill: none;
+    pointer-events: all;
 }
 
 #states {
-  fill: #aaa;
+    fill: #aaa;
 }
 
 #states .active {
-  fill: orange;
+    fill: orange;
 }
 
 #state-borders {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 1.5px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  pointer-events: none;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.5px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    pointer-events: none;
 }
+
 .counties {
-  fill: #ccc;
-  stroke: #fff;
-  stroke-width: .5px;
+    fill: #ccc;
+    stroke: #fff;
+    stroke-width: .5px;
 }
 
 .counties:hover {
-  fill: red;
+    fill: red;
 }
 
 /*.bar rect {
@@ -61,32 +62,32 @@ span{
   fill: #aaa;
 }*/
 .d3-tip {
-  line-height: 1;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 2px;
-   text-align: center;
+    line-height: 1;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    text-align: center;
 }
 
 /* Creates a small triangle extender for the tooltip */
 .d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 20px;
-  width: 100%;
-  line-height: 0.8;
-  color: rgba(0, 0, 0, 0.8);
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
+    box-sizing: border-box;
+    display: inline;
+    font-size: 20px;
+    width: 100%;
+    line-height: 0.8;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
 }
 
 /* Style northward tooltips differently */
 .d3-tip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
 }
 
 .bar:hover {

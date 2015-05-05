@@ -6,7 +6,7 @@ MapVis = function (_parentElement, _eventHandler) {
 
 MapVis.prototype.initVis = function () {
     var that = this,
-        width = 960,
+        width = 800,
         height = 500,
         active = d3.select(null);
 
@@ -122,9 +122,7 @@ MapVis.prototype.initVis = function () {
             changeMap(selected);
             changeCounties(selected);
         });
-        if (!error){
 
- 
         usStates = us_states_names;
 
         var incomePpl = [1, 5000, 17500, 37500, 62500, 150000, 300000];
@@ -211,7 +209,7 @@ MapVis.prototype.initVis = function () {
                 return h.properties['county'];
             })
             .entries(hospitals['features']);
-        }
+
         numHospitalsByState = hospitalsByStateAndCounty.reduce(function (map, d) {
             map[d.key] = d3.sum(d.values.map(function (c) {
                 return c.values.length;
@@ -463,7 +461,7 @@ MapVis.prototype.initVis = function () {
                 return colorScale(rateById[d.id]);
             })
             .attr("class", "counties")
-            .on("click", clickedCountry);
+            .on("click", clickedCounty);
 
         var selectedState = usStates.filter(function (s) {
             return s.id == d.id;
@@ -482,7 +480,8 @@ MapVis.prototype.initVis = function () {
 
         var fontScale = d3.scale.linear()
             .domain(d3.extent(numHospitalsByCountyValues))
-            .range([5, 11]);
+            .range([5, 10]);
+
         if (stateHospitals && stateHospitals.length) {
             stateHospitals = stateHospitals[0].values;
             console.log('state hospitals', stateHospitals);
@@ -498,10 +497,12 @@ MapVis.prototype.initVis = function () {
                         });
                     if (countyId) {
                         var feature = countyFeatures.filter(function (s) {
-                            return s.id == countyId[0].id;
-                        })[0];
+                                return s.id == countyId[0].id;
+                            })[0],
+                            path = counties[0][countyFeatures.indexOf(feature)];
                     }
-                    clickedCountry(feature);
+
+                    clickedCounty(feature, path);
                 })
                 .attr("x", function (d) {
                     var position = getStateNumberPosition(this);
@@ -576,7 +577,7 @@ MapVis.prototype.initVis = function () {
     }
 
 
-    function clickedCountry(c) {
+    function clickedCounty(c, el) {
 
         var rateById = {},
             nameById = {},
@@ -588,9 +589,15 @@ MapVis.prototype.initVis = function () {
             dataById[+d.id] = d;
         });
 
-        if (active.node() === this) return reset();
+        if (active.node() === this || active.node() === el) return reset();
         active.classed("active", false);
-        active = d3.select(this).classed("active", true);
+
+        if (d3.select(this)[0][0] && d3.select(this)[0][0].tagName == "path") {
+            active = d3.select(this).classed("active", true);
+        } else {
+            active = d3.select(el).classed("active", true);
+        }
+
         d3.selectAll('.hospital_icon').remove();
         var countyId = +c.id;
         var thisCountyData = dataById[countyId];
