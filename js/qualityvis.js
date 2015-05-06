@@ -5,7 +5,7 @@ QualityVis = function (_parentElement, _qualityData, _hosData, _eventHandler) {
     this.eventHandler = _eventHandler;
     this.displayData = [];
     this.quality;
-    this.tipData = ['a', 'a']
+    this.tipData = [0, 0]
     this.histarray;
     this.last_tip = null;
     this.initVis();
@@ -87,7 +87,7 @@ QualityVis.prototype.updateVis = function () {
     this.histarray = null;
     this.comparevalues(hist);
 
-    if (this.tip[0] != that.last_tip){
+    if (that.tip[0] != that.last_tip){
         this.tip = d3.tip()
             .attr('class', 'd3-tip')
             .offset([-20, 0])
