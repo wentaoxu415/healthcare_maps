@@ -88,9 +88,9 @@ QualityVis.prototype.updateVis = function () {
     this.histarray = null;
     this.comparevalues(hist);
 
-    console.log(this.tip);
+    console.log(this.tipData);
     console.log(that.last_tip);
-    if (this.tip != that.last_tip){
+    if (this.tipData != that.last_tip){
         this.tip = d3.tip()
             .attr('class', 'd3-tip')
             .offset([-20, 0])
