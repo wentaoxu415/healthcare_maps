@@ -5,6 +5,7 @@ RaceVis = function (_parentElement, _county_race, _state_demo, _eventHandler) {
     this.eventHandler = _eventHandler;
     this.displayData = [];
     this.displayDataState = [];
+    this.state;
     this.age_domain = ["black", "hispanic", "white", "other"]
     this.initVis();
 }
@@ -150,5 +151,29 @@ RaceVis.prototype.onSelectionChange = function (d) {
     var state = d.properties.state;
     this.displayData = that.county_race[county];
     this.displayDataState = that.state_demo[state]
+    this.updateVis();
+}
+
+RaceVis.prototype.onMapSelectionChanged = function (d) {
+
+    var that = this;
+
+    this.displayDataState = [];
+
+    if (d.state) {
+        console.log(d.state);
+        this.displayData = [];
+        this.state = d.state.code;
+        this.displayDataState = that.state_demo[d.state.code];
+    } else if (d.county) {
+        this.displayData = that.county_race[d.county];
+        this.displayDataState = that.state_demo[this.state];
+    }
+    else {
+        this.displayData = [];
+        this.displayDataState = [];
+        this.state = null; 
+    }
+
     this.updateVis();
 }

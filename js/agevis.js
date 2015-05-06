@@ -5,6 +5,7 @@ AgeVis = function(_parentElement, _county_age, _state_demo, _eventHandler){
   this.eventHandler = _eventHandler;
   this.displayData = [];
   this.displayDataState = [];
+  this.state;
   this.age_domain = ["Under 19", "19 to 64", "Over 65"]
   this.initVis();
 }
@@ -105,8 +106,7 @@ AgeVis.prototype.updateVis = function(){
        .attr("width", (that.width/11));
 
     // adds bar features
-    bar.attr("y", function(d) {
-            console.log(that.y(d)); 
+    bar.attr("y", function(d) { 
             return (that.y(d));
         })
        .attr("height", function(d){return that.height - 150 - that.y(d);})
@@ -126,13 +126,12 @@ AgeVis.prototype.updateVis = function(){
         .append("rect")
         .attr("class", "sbar")
         .attr("x", function(d,i){
-           console.log("hi"); return  that.x(i) + (that.width/10);
+          return  that.x(i) + (that.width/10);
         })
        .attr("width", (that.width/11));
 
     // adds bar features
     sbar.attr("y", function(d) {
-            console.log(that.y(d)); 
             return (that.y(d));
         })
        .attr("height", function(d){return that.height - 150 - that.y(d);})
@@ -148,7 +147,31 @@ AgeVis.prototype.onSelectionChange = function(d){
   this.updateVis();
 }
 
+AgeVis.prototype.onMapSelectionChanged = function (d) {
 
+    var that = this;
+
+    this.displayDataState = [];
+
+    if (d.state) {
+        this.displayData = [];
+        this.state = d.state.code;
+        this.displayDataState = that.state_demo[d.state.code];
+    } else if (d.county) {
+        this.displayData = that.county_age[d.county];
+        this.displayDataState = that.state_demo[this.state];
+    }
+    else {
+        this.displayData = [];
+        this.displayDataState = [];
+        this.state = null; 
+    }
+
+
+
+
+    this.updateVis();
+}
 
 
 
