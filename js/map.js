@@ -97,6 +97,7 @@ MapVis.prototype.initVis = function () {
     var counties;
     var usStates;
     var filteredData;
+    var state_income;
     var hospitalsByStateAndCounty = {},
         numHospitalsByState,
         numHospitalsByCounty;
@@ -109,10 +110,12 @@ MapVis.prototype.initVis = function () {
         .defer(d3.json, "data/state_demographics.json")
         .defer(d3.json, "data/county_demographics.json")
         .defer(d3.json, "data/state_counties.json")
+        .defer(d3.json, "data/state_avg_income.json")
         .await(ready);
-
-    function ready(error, us, allPop, hospitals, us_states_names, state_demographics, county_demographics, state_counties) {
-
+////////////////////////////////////////////////////
+//CALCULATE NONWHITE, ELDER, INCOME 
+    function ready(error, us, allPop, hospitals, us_states_names, state_demographics, county_demographics, state_counties, _state_income) {
+        state_income = _state_income;
         d3.select("select").on("change", function () {
             selected = d3.select("select").node().value;
             changeMap(selected);
@@ -126,7 +129,6 @@ MapVis.prototype.initVis = function () {
         allData = allPop;
 
         allData.forEach(function (item) {
-
             // Parsing data for demographics
             var currentDemographics,
                 nonWhiteValue = 0,
@@ -157,11 +159,9 @@ MapVis.prototype.initVis = function () {
                     return d.name == item.state;
                 }),
                 incomeValue;
-
             if (currentState) {
                 var currentStateCode = currentState[0].code,
-                    dataState = state_counties[currentStateCode];
-
+                    dataState = state_counties[currentStateCode];                 
                 if (dataState) {
                     if (item.state == item.name) {
                         incomeValue = 0;
@@ -177,26 +177,28 @@ MapVis.prototype.initVis = function () {
                                 });
                             }
                         });
-                    } else {
-                        incomeValue = 0;
-                        var county = drop_county_desc(normalize_county(item.name));
-                        if (dataState[county] && dataState[county].length > 0) {
-                            var sum = dataState[county].reduce(function (a, b) {
-                                return parseInt(a) + parseInt(b)
-                            });
-                            dataState[county].forEach(function (d, i) {
-                                if (i <= 6) {
-                                    incomeValue = incomeValue + parseInt(d) / sum * incomePpl[i];
-                                }
-                            });
-                        }
+                    } 
+                else {
+                    incomeValue = 0;
+                    var county = drop_county_desc(normalize_county(item.name));
+                    if (dataState[county] && dataState[county].length > 0) {
+                        var sum = dataState[county].reduce(function (a, b) {
+                            return parseInt(a) + parseInt(b)
+                        });
+                        dataState[county].forEach(function (d, i) {
+                            if (i <= 6) {
+
+                                incomeValue = incomeValue + parseInt(d) / sum * incomePpl[i];
+                            }
+                        });
                     }
+                }
                 }
             }
             item.Income = Math.round(incomeValue);
         });
 
-
+////////////////////////////////////////////////////
         hospitalData = hospitals;
         hospitalsByStateAndCounty = d3.nest()
             .key(function (h) {
@@ -345,9 +347,8 @@ MapVis.prototype.initVis = function () {
                 return +d[selected];
             });
 
-            colorScale = d3.scale.linear()
-                .domain(popStatesExtent)
-                .range(["rgb(255, 255, 178)", "rgb(31, 178, 36)"]);
+
+
 
             var rateById = {};
             var nameById = {};
@@ -357,11 +358,25 @@ MapVis.prototype.initVis = function () {
                 nameById[d.stateId] = d.state;
             });
 
+
+            if (selected == "Income"){
+                popStates.forEach(function (d) {
+                rateById[d.stateId] = state_income[d.state];
+                nameById[d.stateId] = d.state;
+                });
+                popStatesExtent = [30000, 75000]
+            }
+            
+            colorScale = d3.scale.linear()
+                .domain(popStatesExtent)
+                .range(["rgb(255, 255, 178)", "rgb(31, 178, 36)"]);
+
             states.transition()
                 .duration(500)
                 .style("fill", function (d, i) {
                     return colorScale(rateById[d.id]);
                 });
+
 
             states.on("mouseover", function (d, i) {
                 tooltip.show("<b>" + nameById[d.id] + "</b>" + "<br>" + selected + ": " + numFormat(rateById[d.id]));
