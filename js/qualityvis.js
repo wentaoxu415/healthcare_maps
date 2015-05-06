@@ -202,9 +202,9 @@ QualityVis.prototype.onMapSelectionHighlight = function (d) {
     var hospital = d.el.properties.name;
     this.quality = d.highlight ? this.qualityData[hospital] : null;
     console.log("when?");
-    if (d.highlight && that.first == true) {
+    if (d.highlight) {
         this.tipData = hospital + '<br/>' + this.qualityData[hospital];
-        that.first = false;
+        console.log(this.tipData);
     }
     this.updateVis();
 }

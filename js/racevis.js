@@ -161,7 +161,6 @@ RaceVis.prototype.onMapSelectionChanged = function (d) {
     this.displayDataState = [];
 
     if (d.state) {
-        console.log(d.state);
         this.displayData = [];
         this.state = d.state.code;
         this.displayDataState = that.state_demo[d.state.code];
