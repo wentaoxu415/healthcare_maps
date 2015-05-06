@@ -158,7 +158,7 @@ ScatterVis.prototype.onMapSelectionHighlight = function (d) {
     var hospital = d.el.properties.name;
     this.scatter = d.highlight ? this.displayData.indexOf(this.scatterData[hospital]) : null;
     if (d.highlight) {
-        this.tipData = hospital + '<br/>quality: ' + this.scatterData[hospital].quality + ', spending: ' + this.scatterData[hospital].spending;
+        this.tipData = hospital + '<br/>quality: ' + this.scatterData[hospital].quality + ', spending: ' + '$'+this.scatterData[hospital].spending;
     }
     this.updateVis();
 }

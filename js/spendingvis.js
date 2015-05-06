@@ -201,7 +201,7 @@ SpendingVis.prototype.onMapSelectionHighlight = function (d) {
     var hospital = d.el.properties.name;
     this.spending = d.highlight ? this.spendingData[hospital] : null;
     if (d.highlight) {
-        this.tipData = hospital + '<br/>' + this.spendingData[hospital];
+        this.tipData = hospital + '<br/>' + '$'+this.spendingData[hospital];
     }
     this.updateVis();
 }
