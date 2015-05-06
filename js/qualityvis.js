@@ -7,6 +7,7 @@ QualityVis = function (_parentElement, _qualityData, _hosData, _eventHandler) {
     this.quality;
     this.tipData = '';
     this.histarray;
+    this.first = true;
     this.initVis();
 }
 
@@ -187,6 +188,7 @@ QualityVis.prototype.onMapSelectionChanged = function (d) {
 
     } else {
         remove = true;
+        that.first = true;
     }
 
     for (var key in this.qualityData) {
@@ -204,8 +206,9 @@ QualityVis.prototype.onMapSelectionHighlight = function (d) {
     var that = this;
     var hospital = d.el.properties.name;
     this.quality = d.highlight ? this.qualityData[hospital] : null;
-    if (d.highlight) {
+    if (d.highlight && that.first == true) {
         this.tipData = hospital + '<br/>' + this.qualityData[hospital];
+        that.first = false;
     }
     this.updateVis();
 }
