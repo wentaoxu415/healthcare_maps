@@ -5,7 +5,9 @@ SpendingVis = function (_parentElement, _spendingData, _hosData, _eventHandler) 
     this.eventHandler = _eventHandler;
     this.displayData = [];
     this.spending;
-    this.tipData = '';
+    this.tipData = 'a';
+    this.tipMoney;
+    this.last_tip = 'b';
     this.histarray;
     this.initVis();
 }
@@ -86,13 +88,14 @@ SpendingVis.prototype.updateVis = function () {
         return d.length;
     })])
 
-    this.tip = d3.tip()
-        .attr('class', 'd3-tip')
-        .offset([-20, 0])
-        .html(function (d) {
-            return "<style='color:white'>" + that.tipData + "</style>";
-        })
-
+    if (this.tipData != that.last_tip){
+        this.tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-20, 0])
+            .html(function (d) {
+                return "<style='color:white'>"+that.tipData+"<br/>"+"$"+that.tipMoney+"</style>";
+            })
+    }
     this.svg.call(this.tip);
 
     this.svg.selectAll(".bar1").remove();
@@ -201,7 +204,9 @@ SpendingVis.prototype.onMapSelectionHighlight = function (d) {
     var hospital = d.el.properties.name;
     this.spending = d.highlight ? this.spendingData[hospital] : null;
     if (d.highlight) {
-        this.tipData = hospital + '<br/>' + '$'+this.spendingData[hospital];
+        this.tipData = hospital;
+        this.last_tip = hospital;
+        this.tipMoney = this.spendingData[hospital];
     }
     this.updateVis();
 }
