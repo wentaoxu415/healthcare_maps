@@ -25,12 +25,7 @@ QualityVis.prototype.initVis = function () {
             this.displayData.push(this.qualityData[key])
         }
     }
-    console.log(d3.max(this.displayData, function (d) {
-        return d;
-    }));
-    console.log(d3.min(this.displayData, function (d) {
-        return d;
-    }));
+
     this.svg = this.svg
         .append("g")
         .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
@@ -64,8 +59,6 @@ QualityVis.prototype.initVis = function () {
         .attr("y", 5)
         .attr("x", 10)
         .attr("transform", "rotate(45)")
-        //.attr("text-anchor",  "start")
-        //.style("text-anchor", "start")
         .text(function (d, i) {
             return d
         })
@@ -134,7 +127,6 @@ QualityVis.prototype.updateVis = function () {
     bar.append("text")
         .attr("dy", ".75em")
         .attr("y", -10)
-        // .attr("x", this.x(hist[0].dx) / 2)
         .attr("x", 5)
         .attr("text-anchor", "middle")
         .attr("fill", "#aaa")
@@ -171,6 +163,7 @@ QualityVis.prototype.onMapSelectionChanged = function (d) {
         remove = false;
 
     if (d.state) {
+        console.log(d.state);
         var stateHospitalsData = that.hosData.features.filter(function (data) {
             return data.properties.state == d.state.code;
         });
@@ -179,6 +172,7 @@ QualityVis.prototype.onMapSelectionChanged = function (d) {
         });
 
     } else if (d.county) {
+        console.log(d.county);
         var stateHospitalsData = that.hosData.features.filter(function (data) {
             return data.properties.county.toLowerCase() == d.county;
         });
@@ -187,6 +181,7 @@ QualityVis.prototype.onMapSelectionChanged = function (d) {
         });
 
     } else {
+        console.log("exit?");
         remove = true;
         that.first = true;
     }
@@ -206,6 +201,7 @@ QualityVis.prototype.onMapSelectionHighlight = function (d) {
     var that = this;
     var hospital = d.el.properties.name;
     this.quality = d.highlight ? this.qualityData[hospital] : null;
+    console.log("when?");
     if (d.highlight && that.first == true) {
         this.tipData = hospital + '<br/>' + this.qualityData[hospital];
         that.first = false;
