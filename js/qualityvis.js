@@ -94,7 +94,7 @@ QualityVis.prototype.updateVis = function () {
             .html(function (d) {
                 return "<style='color:white'>"+that.tipData[0]+'<br/>'+that.tipData[1]+"</style>";
         })
-    }}
+    }
 
     this.svg.call(this.tip);
 
