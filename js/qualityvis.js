@@ -5,7 +5,7 @@ QualityVis = function (_parentElement, _qualityData, _hosData, _eventHandler) {
     this.eventHandler = _eventHandler;
     this.displayData = [];
     this.quality;
-    this.tipData = '';
+    this.tipData = ['a', 'a']
     this.histarray;
     this.last_tip = null;
     this.initVis();
