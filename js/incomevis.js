@@ -4,6 +4,7 @@ IncomeVis = function(_parentElement, _county_income, _eventHandler){
 	this.eventHandler = _eventHandler;
 	this.displayData = [];
   this.percentagedata = [];
+  this.county;
   this.total;
 	this.age_domain = ["$1 to 9,999", "$10,000 to 24,999", "$25,000 to 49,999", "$50,000 to 74,999", "$75,000 to 99,999", "$100,000 to 199,999", "$200,000 or more"]
 	this.initVis();
@@ -129,4 +130,22 @@ IncomeVis.prototype.datawrangle = function(d){
   }
   //console.log(this.percentagedata);
 
+}
+
+AgeVis.prototype.onMapSelectionChanged = function (d) {
+
+    var that = this;
+
+    if (d.county) {
+        this.displayData = that.county_income[d.county];
+    }
+    else {
+        this.displayData = [];
+        this.county= null; 
+    }
+
+
+
+
+    this.updateVis();
 }
