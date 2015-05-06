@@ -88,8 +88,8 @@ QualityVis.prototype.updateVis = function () {
     this.histarray = null;
     this.comparevalues(hist);
 
-    console.log(this.tipData);
-    console.log(that.last_tip);
+    
+    
     if (this.tipData != that.last_tip){
         this.tip = d3.tip()
             .attr('class', 'd3-tip')
@@ -168,7 +168,6 @@ QualityVis.prototype.onMapSelectionChanged = function (d) {
         remove = false;
 
     if (d.state) {
-        console.log(d.state);
         var stateHospitalsData = that.hosData.features.filter(function (data) {
             return data.properties.state == d.state.code;
         });
@@ -177,7 +176,6 @@ QualityVis.prototype.onMapSelectionChanged = function (d) {
         });
 
     } else if (d.county) {
-        console.log(d.county);
         var stateHospitalsData = that.hosData.features.filter(function (data) {
             return data.properties.county.toLowerCase() == d.county;
         });
@@ -186,7 +184,6 @@ QualityVis.prototype.onMapSelectionChanged = function (d) {
         });
 
     } else {
-        console.log("exit?");
         remove = true;
         that.first = true;
     }
@@ -206,12 +203,10 @@ QualityVis.prototype.onMapSelectionHighlight = function (d) {
     var that = this;
     var hospital = d.el.properties.name;
     this.quality = d.highlight ? this.qualityData[hospital] : null;
-    console.log("when?");
     if (d.highlight) {
         this.tipData = hospital
         this.tipScore = this.qualityData[hospital];
         this.last_tip = hospital;
-        console.log(this.tipData);
     }
     this.updateVis();
 }

@@ -128,8 +128,6 @@ IncomeVis.prototype.datawrangle = function(d){
   {
     that.percentagedata.push(d[i]/that.total*100);
   }
-  //console.log(this.percentagedata);
-
 }
 
 IncomeVis.prototype.onMapSelectionChanged = function (d) {

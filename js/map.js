@@ -10,18 +10,12 @@ MapVis.prototype.initVis = function () {
         height = 500,
         active = d3.select(null);
 
-    var population = "Resident total, Census 2010 population",
-        births = "Births in 2010",
-        deaths = "Deaths in 2010",
-        naturalInc = "Natural increase 2010",
-        internationalMig = "Net international migration in 2010",
-        domesticMig = "Net domestic migration in 2010",
-        netMig = "Net migration in 2010",
-        elder = "Elder than 65",
+    var elder = "Elder than 65",
         nonWhite = "Non-white",
         income = "Income";
 
-
+///////////////////////////////////////////////////
+//HELPER FUNCTIONS
     var drop_county_desc = function (county) {
         return county.toLowerCase()
             .replace(' county', '')
@@ -42,6 +36,27 @@ MapVis.prototype.initVis = function () {
             .replace('de soto', 'desoto');
     };
 
+    var tooltip = {
+        element: null,
+        init: function () {
+            this.element = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+        },
+        show: function (t) {
+            this.element.html(t).transition().duration(200).style("left", d3.event.pageX + 20 + "px").style("top", d3.event.pageY - 20 + "px").style("opacity", 0.8);
+        },
+        move: function () {
+            this.element.transition().duration(30).ease("linear").style("left", d3.event.pageX + 20 + "px").style("top", d3.event.pageY - 20 + "px").style("opacity", 0.8);
+        },
+        hide: function () {
+            this.element.transition().duration(500).style("opacity", 0)
+        }
+    };
+
+    tooltip.init();
+
+    var numFormat = d3.format(",d");
+///////////////////////////////////////////////////
+//SVG Initiaizations
     var projection = d3.geo.albersUsa()
         .scale(1000)
         .translate([width / 2, height / 2]);
@@ -68,31 +83,12 @@ MapVis.prototype.initVis = function () {
 
     var map = svg.append("g");
 
-
-    var tooltip = {
-        element: null,
-        init: function () {
-            this.element = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
-        },
-        show: function (t) {
-            this.element.html(t).transition().duration(200).style("left", d3.event.pageX + 20 + "px").style("top", d3.event.pageY - 20 + "px").style("opacity", 0.8);
-        },
-        move: function () {
-            this.element.transition().duration(30).ease("linear").style("left", d3.event.pageX + 20 + "px").style("top", d3.event.pageY - 20 + "px").style("opacity", 0.8);
-        },
-        hide: function () {
-            this.element.transition().duration(500).style("opacity", 0)
-        }
-    };
-
-    tooltip.init();
-
-    var numFormat = d3.format(",d");
-
-
     svg
-        .call(zoom) // delete this line to disable free zooming
+        .call(zoom) 
         .call(zoom.event);
+
+////////////////////////////////////////////////////
+//DATA INITIALIZATION 
 
     var countyData;
     var allData;
@@ -199,6 +195,7 @@ MapVis.prototype.initVis = function () {
             }
             item.Income = Math.round(incomeValue);
         });
+
 
         hospitalData = hospitals;
         hospitalsByStateAndCounty = d3.nest()
@@ -335,17 +332,11 @@ MapVis.prototype.initVis = function () {
 
 //Population,Births,Deaths,NatiralInc,InternationalMig,DomesticMig,NetMig
 
-            selected === "Population" ? d3.select(".desc").text(population) :
-                selected === "Births" ? d3.select(".desc").text(births) :
-                    selected === "Deaths" ? d3.select(".desc").text(deaths) :
-                        selected === "NaturalInc" ? d3.select(".desc").text(naturalInc) :
-                            selected === "InternationalMig" ? d3.select(".desc").text(internationalMig) :
-                                selected === "DomesticMig" ? d3.select(".desc").text(domesticMig) :
-                                    selected === "NetMig" ? d3.select(".desc").text(netMig) :
-                                        selected === "NonWhite" ? d3.select(".desc").text(nonWhite) :
-                                            selected === "Elder" ? d3.select(".desc").text(elder) :
-                                                selected === "Income" ? d3.select(".desc").text(income) :
-                                                    d3.select(".desc").text(income);
+
+            selected === "NonWhite" ? d3.select(".desc").text(nonWhite) :
+                selected === "Elder" ? d3.select(".desc").text(elder) :
+                    selected === "Income" ? d3.select(".desc").text(income) :
+                        d3.select(".desc").text(income);
 
 
             //d3.select(".desc").text(selected);
