@@ -4,6 +4,7 @@ IncomeVis = function(_parentElement, _county_income, _eventHandler){
 	this.eventHandler = _eventHandler;
 	this.displayData = [];
   this.percentagedata = [];
+  this.county;
   this.total;
 	this.age_domain = ["$1 to 9,999", "$10,000 to 24,999", "$25,000 to 49,999", "$50,000 to 74,999", "$75,000 to 99,999", "$100,000 to 199,999", "$200,000 or more"]
 	this.initVis();
@@ -73,7 +74,7 @@ IncomeVis.prototype.updateVis = function(){
 
     this.y.domain([0, 100]);
 
-    this.svg.selectAll(".bar").remove();
+
      // Data join
     //var bar_g = this.svg.append("g");
     var bar = this.svg.selectAll(".bar")
@@ -97,7 +98,7 @@ IncomeVis.prototype.updateVis = function(){
             return (that.y(d));
         })
        .attr("height", function(d){return that.height - 150 - that.y(d);})
-       .attr("fill", "green");
+       .attr("fill", "#FFCC00");
 
     var tip = d3.tip()
       .attr('class', 'd3-tip')
@@ -127,6 +128,19 @@ IncomeVis.prototype.datawrangle = function(d){
   {
     that.percentagedata.push(d[i]/that.total*100);
   }
-  //console.log(this.percentagedata);
+}
 
+IncomeVis.prototype.onMapSelectionChanged = function (d) {
+
+    var that = this;
+
+    if (d.county) {
+        this.displayData = that.county_income[d.county];
+    }
+    else {
+        this.displayData = [];
+        this.county= null; 
+    }
+
+    this.updateVis();
 }

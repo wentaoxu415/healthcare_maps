@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>CS171-Healthcare Maps</title>
+
+    <!-- Add Libraries-->
+    <script src="libs/d3/d3.v3.min.js"></script>
+    <script src="libs/d3/d3-tip.js"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="libs/topojson/topojson.v1.min.js"></script>
+    <script src="libs/queue/queue.v1.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Add stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+</head>
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">HEALTHCARE MAPS</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="http://wentaoxu415.github.io/us_healthcare_data/index.html#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="http://wentaoxu415.github.io/us_healthcare_data/index.html#methods">
+                        Methods</a>
+                    </li>
+                    <li>
+                        <a href="https://docs.google.com/a/college.harvard.edu/document/d/1J5TUfdKeDPRahM8CcJDo6mwqWQ0DhTOzQVJXRstkX24/edit?usp=sharing">Process Book</a>
+                    </li>
+                    <li>
+                        <a href="#https://www.youtube.com/watch?v=gtmzzak9IqM&feature=youtu.be">YouTube</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="http://wentaoxu415.github.io/us_healthcare_data/visualization.html">Visualization</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+<div class="container">
+    <h1 id="header">HEALTHCARE MAPS</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-9" id="map_vis">
+            <svg width="800" height="500">
+        </div>
+        <div class="col-md-3 right" id="map_des">
+        <b><ins>Instruction</ins></b>
+            <ol>
+                <li>To select a hospital, click the map in the following order: state -> county -> red cross symbol </li>
+                <li>Once the hospital is selected, the corresponding spending, quality, and demographic data will appear in the graphs below.</li>
+                <li>Click on the county again to zoom out to the national level. The comparison of the selected hospital against the hospitals in the entire nation will be displayed.</li>
+                <li>Click on the state again to zoom into the state level. The comparison of hospital against the hospitals in the same state will be displayed</li>
+                <li>Select a value from the "Heap Map Menu" below to change the appearance of the map.</li>
+            </ol>
+        <b><ins>Heat Map Menu</ins></b>
+            <form>
+                <select>
+                    <option value="NonWhite">Non-white</option>
+                    <option value="Elder">Elder than 65</option>
+                    <option value="Income">Income</option>
+                </select>
+            </form>
+        </div>    
+    </div>
+    <hr class="hori_line">
+    <div class="row">
+        <div class="col-md-9" id="spending_vis">
+            <h3>Hospital Spending</h3>
+            <svg width="800" height="500">
+        </div>
+        <div class="col-md-3 right" id="spending_des">
+            <b><ins>Hospital Spending</ins></b><br>
+            Hospital spending is the average dollar amount that the hospital charges the patient for each episode of care. The Medicare defines episode of care as any series of treatment given to the hospitalized patient within the 30-day period. As a result, this data serves as a good proxy to measure how expensive the selected hospital is.  
+        </div>   
+    </div>
+    <hr class="hori_line">
+    <div class="row">
+        <div class="col-md-9" id="quality_vis">
+            <h3>Hospital Quality</h3>
+            <svg width="800" height="500">
+        </div>
+        <div class="col-md-3 right" id="quality_des">
+            <b><ins>Hospital Quality</ins></b><br>
+            Hospital quality is based on Medicare's surveys that collected 19 measures involving readmission, complications, and deaths from the hospitals. To standardize the score, we have calculate the z-score for each measure and aggregated these z-score to come out with a quality rating for each hospital. In this case, higher positive scores mean better quality for the hospitals.
+        </div>
+    </div>
+    <hr class="hori_line">
+    <div class="row">
+        <div class="col-md-9" id="scatter_vis">
+            <h3>Spending vs. Quality</h3>
+            <svg width="800" height="500">
+        </div>
+        <div class="col-md-3 right" id="scatter_des">
+            <b><ins>Spending vs. Quality</ins></b><br>
+            The scatterplot of spending and quality of healthcare enables us to determine the cost-effectiveness of healthcare. Hospitals situated around the upper left part of plot can be classified as cost-effective hospitals while hospitals situated aroudn the lower right part of the plot can be classified as cost-ineffecive hospitals. 
+        </div>
+    </div>
+    <hr class="hori_line">
+    <div class="row">
+        <div class="col-md-3" id="age_vis">
+            <h5>Age Distribution</h5>
+            <svg width="300" height="500">
+        </div>
+        <div class="col-md-3" id="race_vis">
+            <h5>Race Distribution</h5>
+            <svg width="300" height="500">
+        </div>
+        <div class="col-md-3" id="income_vis">
+            <h5>Income Distribution</h5>
+            <svg width="300" height="500">
+        </div>
+        <div class="col-md-3 right" id="demo_des">
+            <b><ins>Demographic Data</ins></b><br>
+            Geographic variation of the spending and quality of healthcare in the United States is a very serious issue. Poorer states with more elders and minorities tend to have the worst access to good and affordable healthcare. To consider the demographic effects on the spending and care of the healthcare, we have created various graphs on demographic data to help us observe this variation. 
+        </div>
+    </div>
+</div>
+
+
+<!-- Add vis classes-->
+<script src="js/map.js"></script>
+<script src="js/infovis.js"></script>
+<script src="js/agevis.js"></script>
+<script src="js/racevis.js"></script>
+<script src="js/incomevis.js"></script>
+<script src="js/spendingvis.js"></script>
+<script src="js/qualityvis.js"></script>
+<script src="js/scattervis.js"></script>
+<script>
+    $(function () {
+        var mapData = [];
+        var hosData = [];
+        var county_age = [];
+        var state_age = [];
+        var county_race = [];
+        var state_race = [];
+        var county_income = [];
+        var spendingData = [];
+        var qualityData = [];
+        var scatterData = [];
+        var initVis = function () {
+            var MyEventHandler = new Object();
+//            var map_vis = new MapVis(d3.select("#map_vis"), mapData, hosData, MyEventHandler);
+            var map_vis = new MapVis(d3.select("#map_vis"), MyEventHandler);
+            var info_vis = new InfoVis(d3.select("#info_vis"), mapData, hosData, MyEventHandler);
+            var age_vis = new AgeVis(d3.select("#age_vis"), county_age, state_age, MyEventHandler);
+            var race_vis = new RaceVis(d3.select("#race_vis"), county_race, state_race, MyEventHandler);
+            var income_vis = new IncomeVis(d3.select("#income_vis"), county_income, MyEventHandler);
+
+            var spending_vis = new SpendingVis(d3.select("#spending_vis"), spendingData, hosData, MyEventHandler);
+            var quality_vis = new QualityVis(d3.select("#quality_vis"), qualityData, hosData, MyEventHandler);
+            var scatter_vis = new ScatterVis(d3.select("#scatter_vis"), scatterData, hosData, MyEventHandler);
+
+            $(MyEventHandler).bind("selectionChanged", function (event, object) {
+                info_vis.onSelectionChange(object);
+                age_vis.onSelectionChange(object);
+                race_vis.onSelectionChange(object);
+                income_vis.onSelectionChange(object);
+//                spending_vis.onSelectionChange(object);
+//                quality_vis.onSelectionChange(object);
+//                scatter_vis.onSelectionChange(object);
+            })
+
+            $(MyEventHandler).bind("mapSelectionChanged", function (event, object) {
+                spending_vis.onMapSelectionChanged(object);
+                quality_vis.onMapSelectionChanged(object);
+                scatter_vis.onMapSelectionChanged(object);
+                race_vis.onMapSelectionChanged(object);
+                age_vis.onMapSelectionChanged(object);
+                income_vis.onMapSelectionChanged(object);
+            })
+
+            $(MyEventHandler).bind("mapSelectionHighlight", function (event, object) {
+                spending_vis.onMapSelectionHighlight(object);
+                quality_vis.onMapSelectionHighlight(object);
+                scatter_vis.onMapSelectionHighlight(object);
+            })
+        }
+        var dataLoaded = function (error, _mapData, _hosData, _county_age, _state_age, _county_race, _state_race, _county_income, _spendingData, _qualityData, _scatterData) {
+            if (!error) {
+                mapData = _mapData;
+                hosData = _hosData;
+                county_age = _county_age;
+                state_age = _state_age;
+                county_race = _county_race;
+                state_race = _state_race;
+                county_income = _county_income;
+                spendingData = _spendingData;
+                qualityData = _qualityData;
+                scatterData = _scatterData;
+                initVis();
+            }
+        }
+        var startHere = function () {
+            queue()
+                    .defer(d3.json, 'data/us.json')
+                    .defer(d3.json, 'data/hospital_final.json')
+                    .defer(d3.json, 'data/county_age.json')
+                    .defer(d3.json, 'data/state_age.json')
+                    .defer(d3.json, 'data/county_race.json')
+                    .defer(d3.json, 'data/state_race.json')
+                    .defer(d3.json, 'data/county_income.json')
+                    .defer(d3.json, 'data/hospital_spendingData.json')
+                    .defer(d3.json, 'data/quality_score.json')
+                    .defer(d3.json, 'data/scatter.json')
+                    .await(dataLoaded);
+        }
+        //Call startHere() function
+        startHere();
+    })
+</script>
+<!-- Plugin JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.fittext.js"></script>
+<script src="js/wow.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="js/creative.js"></script>
+</body>
+</html>
