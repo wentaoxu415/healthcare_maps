@@ -20,12 +20,16 @@ body{
 
 }
 
-.hori_line{
+hr{
+
     height: 3px;
     color: #FF6600;
     background-color: #FF6600;
-    width: 80%;
+    width: 80%;  
+    max-width: 1000px;
 }
+
+
 .row {
     margin: 40px 0;
 }
