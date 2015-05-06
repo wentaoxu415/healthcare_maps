@@ -42,6 +42,7 @@ body{
 .background {
     fill: none;
     pointer-events: all;
+    background-color: red;
 }
 
 #states {
