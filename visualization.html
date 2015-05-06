@@ -83,10 +83,10 @@
         <b><ins>Instruction</ins></b>
             <ol>
                 <li>To select a hospital, click the map in the following order: state -> county -> red cross symbol </li>
-                <li>Once you have selected the hospital, the corresponding spending, quality, and demographic data will appear in the graphs below.</li>
+                <li>Once the hospital is selected, the corresponding spending, quality, and demographic data will appear in the graphs below.</li>
                 <li>Click on the county again to zoom out to the national level. The comparison of the selected hospital against the hospitals in the entire nation will be displayed.</li>
                 <li>Click on the state again to zoom into the state level. The comparison of hospital against the hospitals in the same state will be displayed</li>
-                <li>Select a value from the dropdown menu below to change the value of the heat map.</li>
+                <li>Select a value from the "Heap Map Menu" below to change the appearance of the map.</li>
             </ol>
         <b><ins>Heat Map Menu</ins></b>
             <form>
@@ -105,6 +105,8 @@
             <svg width="800" height="500">
         </div>
         <div class="col-md-3 right" id="spending_des">
+            <b><ins>Hospital Spending</ins></b>
+            Hospital spending is the average dollar amount that the hospital charges the patient for each episode of care. The Medicare defines episode of care as any series of treatment given to the hospitalized patient within the 30-day period. As a result, this data serves as a good proxy to measure how expensive the selected hospital is.  
         </div>   
     </div>
     <hr class="hori_line">
@@ -114,6 +116,7 @@
             <svg width="800" height="500">
         </div>
         <div class="col-md-3 right" id="quality_des">
+            Hospital quality is based on Medicare's surveys that collected 19 measures involving readmission, complications, and deaths from the hospitals. To standardize the score, we have calculate the z-score for each measure and aggregated these z-score to come out with a quality rating for each hospital. In this case, higher positive scores mean better quality for the hospitals.
         </div>
     </div>
     <hr class="hori_line">
@@ -123,6 +126,7 @@
             <svg width="800" height="500">
         </div>
         <div class="col-md-3 right" id="scatter_des">
+            The scatterplot of spending and quality of healthcare enables us to determine the cost-effectiveness of healthcare. Hospitals situated around the upper left part of plot can be classified as cost-effective hospitals while hospitals situated aroudn the lower right part of the plot can be classified as cost-ineffecive hospitals. 
         </div>
     </div>
     <hr class="hori_line">
@@ -140,6 +144,7 @@
             <svg width="300" height="500">
         </div>
         <div class="col-md-3 right" id="demo_des">
+            Geographic variation of the spending and quality of healthcare in the United States is a very serious issue. Poorer states with more elders and minorities tend to have the worst access to good and affordable healthcare. To consider the demographic effects on the spending and care of the healthcare, we have created various graphs on demographic data to help us observe this variation. 
         </div>
     </div>
 </div>
