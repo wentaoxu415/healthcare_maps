@@ -167,9 +167,6 @@ AgeVis.prototype.onMapSelectionChanged = function (d) {
         this.state = null; 
     }
 
-
-
-
     this.updateVis();
 }
 

@@ -132,7 +132,7 @@ IncomeVis.prototype.datawrangle = function(d){
 
 }
 
-AgeVis.prototype.onMapSelectionChanged = function (d) {
+IncomeVis.prototype.onMapSelectionChanged = function (d) {
 
     var that = this;
 
@@ -143,9 +143,6 @@ AgeVis.prototype.onMapSelectionChanged = function (d) {
         this.displayData = [];
         this.county= null; 
     }
-
-
-
 
     this.updateVis();
 }
