@@ -88,6 +88,8 @@ QualityVis.prototype.updateVis = function () {
     this.histarray = null;
     this.comparevalues(hist);
 
+    console.log(this.tip);
+    console.log(that.last_tip);
     if (this.tip != that.last_tip){
         this.tip = d3.tip()
             .attr('class', 'd3-tip')
@@ -96,10 +98,9 @@ QualityVis.prototype.updateVis = function () {
                 return "<style='color:white'>"+that.tipData+'<br/>'+that.tipScore+"</style>";
         })
     }
-    console.log("clear")
-
+    
     this.svg.call(this.tip);
-    console.log("clear1")
+    
     this.svg.selectAll(".bar1").remove();
 
     var bar = this.svg.selectAll(".bar1")
