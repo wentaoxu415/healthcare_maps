@@ -224,8 +224,6 @@ MapVis.prototype.initVis = function () {
             return map;
         }, {});
 
-        console.log('numHospitalsByState', numHospitalsByState);
-        console.log('numHospitalsByCounty', numHospitalsByCounty);
 
         var popStates = allPop.filter(function (d) {
             return +d.countyId === 0;
@@ -254,7 +252,6 @@ MapVis.prototype.initVis = function () {
             .range([12, 28]);
 
         var states_features = topojson.feature(us, us.objects.states).features;
-        console.log('states_features', states_features);
         var states = map.selectAll("path .feature")
             .data(states_features)
             .enter().append("path")
@@ -484,7 +481,6 @@ MapVis.prototype.initVis = function () {
 
         if (stateHospitals && stateHospitals.length) {
             stateHospitals = stateHospitals[0].values;
-            console.log('state hospitals', stateHospitals);
             var numCountyHospitalsLabels = map.selectAll("text.county_num_hospitals")
                 .data(stateHospitals)
                 .enter()
@@ -519,7 +515,6 @@ MapVis.prototype.initVis = function () {
                 .attr("visibility", "visible")
                 .attr("x", function (d) {
                     var countyName = normalize_county(d.key);
-                    console.log('----------------', stateId, stateCode, countyName);
                     var countyId = allData.filter(function (d) {
                         return d.stateId == stateId && drop_county_desc(d.name) == countyName;
                     });
@@ -533,7 +528,6 @@ MapVis.prototype.initVis = function () {
                 })
                 .attr("y", function (d) {
                     var countyName = normalize_county(d.key);
-                    console.log('----------------', stateId, stateCode, countyName);
                     var countyId = allData.filter(function (d) {
                         return d.stateId == stateId && drop_county_desc(d.name) == countyName;
                     });
@@ -652,7 +646,7 @@ MapVis.prototype.initVis = function () {
             });
 
         $(that.eventHandler).trigger("mapSelectionChanged", {county: countyName});
-        console.log(countyName, countyHospitals);
+        
     }
 
     function changeCounties(selected) {
