@@ -5,7 +5,8 @@ QualityVis = function (_parentElement, _qualityData, _hosData, _eventHandler) {
     this.eventHandler = _eventHandler;
     this.displayData = [];
     this.quality;
-    this.tipData = [0, 0]
+    this.tipData;
+    this.tipScore;
     this.histarray;
     this.last_tip = null;
     this.initVis();
@@ -87,12 +88,12 @@ QualityVis.prototype.updateVis = function () {
     this.histarray = null;
     this.comparevalues(hist);
 
-    if (that.tip[0] != that.last_tip){
+    if (this.tip != that.last_tip){
         this.tip = d3.tip()
             .attr('class', 'd3-tip')
             .offset([-20, 0])
             .html(function (d) {
-                return "<style='color:white'>"+that.tipData[0]+'<br/>'+that.tipData[1]+"</style>";
+                return "<style='color:white'>"+that.tipData+'<br/>'+that.tipScore+"</style>";
         })
     }
 
@@ -205,7 +206,8 @@ QualityVis.prototype.onMapSelectionHighlight = function (d) {
     this.quality = d.highlight ? this.qualityData[hospital] : null;
     console.log("when?");
     if (d.highlight) {
-        this.tipData = [hospital, this.qualityData[hospital]];
+        this.tipData = hospital
+        this.tipScore = this.qualityData[hospital];
         this.last_tip = hospital;
         console.log(this.tipData);
     }
