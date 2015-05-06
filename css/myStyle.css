@@ -42,7 +42,6 @@ body{
 .background {
     fill: none;
     pointer-events: all;
-    background-color: red;
 }
 
 #states {
@@ -173,6 +172,9 @@ div.tooltip {
     color: #000;
 }
 
+#map_vis{
+    background-color: red;
+}
 #map_vis > form {
     text-align: center;
 }
