@@ -5,10 +5,10 @@ QualityVis = function (_parentElement, _qualityData, _hosData, _eventHandler) {
     this.eventHandler = _eventHandler;
     this.displayData = [];
     this.quality;
-    this.tipData;
+    this.tipData = 'a';
     this.tipScore;
     this.histarray;
-    this.last_tip = null;
+    this.last_tip = 'b';
     this.initVis();
 }
 
@@ -96,9 +96,10 @@ QualityVis.prototype.updateVis = function () {
                 return "<style='color:white'>"+that.tipData+'<br/>'+that.tipScore+"</style>";
         })
     }
+    console.log("clear")
 
     this.svg.call(this.tip);
-
+    console.log("clear1")
     this.svg.selectAll(".bar1").remove();
 
     var bar = this.svg.selectAll(".bar1")
